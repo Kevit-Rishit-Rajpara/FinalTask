@@ -1,0 +1,190 @@
+
+<div mat-dialog-content>
+    <div
+        class="shadow-2xl absolute top-0 left-0 w-full  h-full bg-black bg-opacity-50 flex  justify-center items-center z-50">
+        <div
+            class="w-[38vw] h-[80vh] bg-green-200 hidden flex-col gap-1 items-center justify-center md:flex">
+            <img class="w-[20vw] items-center m-auto "
+                src="https://cdn.pixabay.com/photo/2019/12/31/11/08/flat-design-4731671_1280.png"
+                alt="shopping Image">
+            <h1
+                class=" text-4xl h-[30%] text-slate-700 font-bold text-center whitespace-normal">WEB-MART<br>E-Commerce
+                Site</h1>
+        </div>
+
+        <!-- ************************************************* FORM ************************************ -->
+        <div
+            class="formContainer w-full h-full my-5 sm:my-20 bg-stone-100 md:w-[37vw] p-2">
+            <h2
+                class="text-center text-slate-700 text-3xl font-semibold"
+                [ngClass]=" newUser ? 'pt-2 pb-2 md:p-5 lg:p-9 text-base md:text-2xl' : 'pt-14 pb-14 text-3xl' ">Welcome
+                to
+                WEB-MART</h2>
+            <hr class="w-80 m-auto" [ngClass]="newUser ? 'pb-2' : 'pb-14'">
+            <div class="loginForm w-full ">
+
+                <form class="flex flex-col gap-14  m-[auto] items-center"
+                    [formGroup]="loginForm" (ngSubmit)="onLogin()"
+                    *ngIf="!newUser">
+                    <!-- -------------------------------- Email---------------- -->
+                    <div class="relative z-0 w-[60%] h-6 mb-6 group">
+                        <input type="email"
+                            id="email"
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                            placeholder=" " formControlName="email" />
+                        <label for="email"
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
+                            address</label>
+                           <span
+                            [ngClass]="!loginForm.get('email')?.valid && loginForm.get('email')?.touched ? 'errorDisplay' : 'errorHidden' ">Valid
+                            Email
+                            is Required</span> 
+                    </div>
+                    <!-- -------------------------------- Password---------------- -->
+                    <div class="relative z-0 w-[60%] h-6 mb-6 group">
+                        <input type="password" formControlName="password"
+                            id="password"
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                            placeholder=" " />
+                        <label for="password"
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+                             <span
+                            [ngClass]="!loginForm.get('password')?.valid && loginForm.get('password')?.touched ? 'errorDisplay' : 'errorHidden' ">Valid
+                            Password
+                            is Required</span>
+                    </div>
+
+                    <div class>
+                        <button type="submit" *ngIf="!newUser"
+                            class="rounded-3xl w-[8rem] py-2 my-2 font-bold focus:outline-none text-slate-600 bg-green-100 shadow-lg shadow-green-500/50 ...">Sign
+                            In</button>
+
+                    </div>
+                    <div *ngIf="!newUser" (click)="newUser = true"
+                        class="text-red-400 font-bold text-sm cursor-pointer hover:uppercase ">
+                        Click here, For Sign Up
+                    </div>
+
+                    <div>
+                        <p *ngIf="newUser">Sign Up with <a href>Google</a></p>
+                    </div>
+                </form>
+
+                <!-- ***************************** For SignUp****************************** -->
+                <form
+                    class="flex flex-col gap-2 sm:gap-5 md:gap-7  m-[auto] items-center text-xs md:text-base"
+                    [formGroup]="signUpForm" (ngSubmit)="onSignUp()"
+                    *ngIf="newUser">
+                    <label
+                        class="relative inline-flex items-center mr-5 cursor-pointer text-xs"
+                        *ngIf="newUser">
+                        <input type="checkbox" value class="sr-only peer"
+                            formControlName="isSeller">
+                        <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-200 dark:peer-focus:ring-green-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-500"></div>
+                        <span
+                            class="ml-3 text-sm  font-semibold md:tracking-[.16rem] text-gray-900 dark:text-gray-300">Register
+                            as a Seller</span>
+                    </label>
+
+                    <!-- -------------------------------- Email---------------- -->
+                    <div class="relative z-0 w-[75%] group">
+                        <input type="email"
+                            id="floating_email"
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer bg-none"
+                            placeholder=" " formControlName="email" />
+                        <label for="email"
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8">Email
+                            address</label>
+                        <span
+                            [ngClass]="!signUpForm.get('email')?.valid && signUpForm.get('email')?.touched ? 'errorDisplay' : 'errorHidden' ">Valid
+                            Email
+                            is Required</span>
+                    </div>
+
+                    <!-- -------------------------------- password---------------- -->
+                    <div class="relative z-0 w-[75%] group">
+                        <input type="password" formControlName="password"
+                            id="floating_password"
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer bg-none"
+                            placeholder=" " required />
+                        <label for="password"
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+                        <span
+                            [ngClass]="!signUpForm.get('password')?.valid && signUpForm.get('password')?.touched ? 'errorDisplay' : 'errorHidden' ">Valid
+                            Must need  6 or more characters</span>
+                    </div>
+
+                    <div class="grid w-[75%] min-h-fit sm:gap-x-5 md:grid-cols-2 ">
+                        <!-- -------------------------------- Fname---------------- -->
+                        <div class="relative z-0 w-full lg:mb-6 group">
+                            <input type="text" formControlName="firstName"
+                                id="first_name"
+                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                                placeholder=" " required />
+                            <label for="first_name"
+                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First
+                                name</label>
+                            <span
+                                [ngClass]="!signUpForm.get('firstName')?.valid && signUpForm.get('firstName')?.touched ? 'errorDisplay' : 'errorHidden' ">Required</span>
+
+                        </div>
+
+                        <!-- -------------------------------- Lname---------------- -->
+                        <div class="relative z-0 w-full lg:mb-6 group">
+                            <input type="text" formControlName="lastName"
+                                id="last_name"
+                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                                placeholder=" " required />
+                            <label for="last_name"
+                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last
+                                name</label>
+                            <span
+                                [ngClass]="!signUpForm.get('lastName')?.valid && signUpForm.get('lastName')?.touched ? 'errorDisplay' : 'errorHidden' ">Required</span>
+                        </div>
+
+                        <!-- --------------------------------Phone---------------- -->
+                        <div class="relative z-0 w-full lg:mb-6 group">
+                            <input type="tel"
+                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                formControlName="phoneNumber"
+                                id="phone"
+                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                                placeholder=" " required />
+                            <label for="phone"
+                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone
+                                number</label>
+                              <span
+                                [ngClass]="!signUpForm.get('phoneNumber')?.valid && signUpForm.get('phoneNumber')?.touched ? 'errorDisplay' : 'errorHidden' ">Valid Number Required</span>  
+                        </div>
+
+                        <!-- -------------------------------- City---------------- -->
+                        <div class="relative z-0 w-full lg:mb-6 group">
+                            <input type="text" formControlName="city"
+                                id="city"
+                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                                placeholder=" " required />
+                            <label for="city"
+                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">City
+                            </label>
+                            <span
+                                [ngClass]="!signUpForm.get('city')?.valid && signUpForm.get('city')?.touched ? 'errorDisplay' : 'errorHidden' ">Required</span>
+                        </div>
+                    </div>
+
+                    <div class=" z-0">
+                        <button type="submit" *ngIf="newUser"
+                            class="rounded-3xl w-[8rem] py-2 my-2 font-bold focus:outline-none text-slate-600 bg-green-100 shadow-lg shadow-green-500/50 ...">Sign
+                            Up</button>
+                    </div>
+
+                    <div *ngIf="newUser" (click)="newUser = false"
+                        class="text-red-400 font-bold text-sm cursor-pointer hover:uppercase ">
+                        Click here, For Login
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
