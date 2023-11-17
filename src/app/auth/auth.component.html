@@ -14,7 +14,7 @@
 
         <!-- ************************************************* FORM ************************************ -->
         <div
-            class="formContainer w-full h-full my-5 sm:my-20 bg-stone-100 md:w-[37vw] p-2">
+            class="formContainer w-full h-[80vh] my-5 sm:my-20 bg-stone-100 md:w-[37vw] p-2">
             <h2
                 class="text-center text-slate-700 text-3xl font-semibold"
                 [ngClass]=" newUser ? 'pt-2 pb-2 md:p-5 lg:p-9 text-base md:text-2xl' : 'pt-14 pb-14 text-3xl' ">Welcome
@@ -35,10 +35,10 @@
                         <label for="email"
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
                             address</label>
-                           <span
+                        <span
                             [ngClass]="!loginForm.get('email')?.valid && loginForm.get('email')?.touched ? 'errorDisplay' : 'errorHidden' ">Valid
                             Email
-                            is Required</span> 
+                            is Required</span>
                     </div>
                     <!-- -------------------------------- Password---------------- -->
                     <div class="relative z-0 w-[60%] h-6 mb-6 group">
@@ -48,7 +48,7 @@
                             placeholder=" " />
                         <label for="password"
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
-                             <span
+                        <span
                             [ngClass]="!loginForm.get('password')?.valid && loginForm.get('password')?.touched ? 'errorDisplay' : 'errorHidden' ">Valid
                             Password
                             is Required</span>
@@ -112,10 +112,11 @@
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
                         <span
                             [ngClass]="!signUpForm.get('password')?.valid && signUpForm.get('password')?.touched ? 'errorDisplay' : 'errorHidden' ">Valid
-                            Must need  6 or more characters</span>
+                            Must need 6 or more characters</span>
                     </div>
 
-                    <div class="grid w-[75%] min-h-fit sm:gap-x-5 md:grid-cols-2 ">
+                    <div
+                        class="grid w-[75%] min-h-fit sm:gap-x-5 md:grid-cols-2 ">
                         <!-- -------------------------------- Fname---------------- -->
                         <div class="relative z-0 w-full lg:mb-6 group">
                             <input type="text" formControlName="firstName"
@@ -154,8 +155,9 @@
                             <label for="phone"
                                 class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone
                                 number</label>
-                              <span
-                                [ngClass]="!signUpForm.get('phoneNumber')?.valid && signUpForm.get('phoneNumber')?.touched ? 'errorDisplay' : 'errorHidden' ">Valid Number Required</span>  
+                            <span
+                                [ngClass]="!signUpForm.get('phoneNumber')?.valid && signUpForm.get('phoneNumber')?.touched ? 'errorDisplay' : 'errorHidden' ">Valid
+                                Number Required</span>
                         </div>
 
                         <!-- -------------------------------- City---------------- -->

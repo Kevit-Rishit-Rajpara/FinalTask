@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormArrayName, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { UserDataService } from '../userData.service';
+import { NavComponent } from '../nav/nav.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-auth',
@@ -13,17 +15,16 @@ export class AuthComponent implements OnInit {
   loginForm!: FormGroup;
   signUpForm!: FormGroup;
   newUser = false;
-  Users: any = []
+  Users: any = [];
 
   constructor(
     private router: Router,
     private authServie: AuthService,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    public dialogRef: MatDialogRef<NavComponent>
   ) {}
 
   ngOnInit(): void {
-    // console.log(this.newUser);
-
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required),
@@ -43,7 +44,13 @@ export class AuthComponent implements OnInit {
         Validators.pattern('^((\\+91-?)|0)?[6-9]{1}?[0-9]{9}$'),
       ]),
       city: new FormControl(null, Validators.required),
+      uid: new FormControl(null),
+      products : new FormArray([])
     });
+  }
+
+  getProductArray() {
+    return this.signUpForm.get('products') as FormArray
   }
 
   onLogin() {
@@ -52,9 +59,11 @@ export class AuthComponent implements OnInit {
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
         (res: any) => {
+          localStorage.setItem('isLogin', 'true');
           console.log(res);
-          // this.userDataService.getUserData()
+          localStorage.setItem('uid', res.localId);
           this.loginForm.reset();
+          this.dialogRef.close();
           alert('Login Successfully');
         },
         (err: any) => {
@@ -62,13 +71,7 @@ export class AuthComponent implements OnInit {
           alert(err);
         }
       );
-
-    this.router.navigate(['']);
   }
-  cleanEmail(data:any) {
-  return data.replace(/[^a-zA-Z0-9.@_]/g, "");
-  }
-  
 
   onSignUp() {
     this.authServie
@@ -76,18 +79,22 @@ export class AuthComponent implements OnInit {
       .subscribe(
         (res: any) => {
           console.log(res);
-          // this.Users.push(this.signUpForm.value)
-          this.userDataService.setUserData(this.cleanEmail(this.signUpForm.value.email), this.signUpForm.value).subscribe(
-            (res) => {
-              console.log(res);
-            },
-            (err) => {
-              console.log(err);
-            }
-          );
-
-          this.signUpForm.reset();
-          alert('successfully signed up');
+          this.signUpForm.value.uid = res.localId
+          console.log(this.signUpForm.value + "Special");
+          
+          this.userDataService
+            .setUserData( this.signUpForm.value )
+            .subscribe(
+              (res:any) => {
+                console.log(res)
+                this.signUpForm.reset();
+                 this.dialogRef.close();
+                alert('successfully signed up');
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
         },
         (err: any) => {
           console.log('Error ' + err);

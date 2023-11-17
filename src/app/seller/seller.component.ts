@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Product } from '../product.model';
 import { ProductDataService } from '../productdata.service';
+import { HttpClient } from '@angular/common/http';
+import { UserDataService } from '../userData.service';
 
 @Component({
   selector: 'app-seller',
@@ -11,42 +12,58 @@ import { ProductDataService } from '../productdata.service';
 export class SellerComponent implements OnInit {
   addProduct!: FormGroup;
 
-  constructor(private productDataService: ProductDataService) {}
+  constructor(private productDataService: ProductDataService, private userDataService : UserDataService) {}
   ngOnInit(): void {
     this.addProduct = new FormGroup({
       name: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
       imgUrl: new FormControl(null, Validators.required),
       actualPrice: new FormControl(null, Validators.required),
-      discPrice: new FormControl(null, Validators.required),
+      discPrice: new FormControl(null, [Validators.required]),
       quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
     });
-
-    this.getProductsData();
+    this.fetchProducts()
   }
 
-  productList:[] =[]
+  productList: Array<any> = [];
+
+  fetchProducts() {
+
+    // this.productDataService.fetchProducts();
+  }
+
 
   getProductsData() {
-    this.productDataService.getUserData().subscribe(
-      (res) => {
-        console.log(res);
-        // this.productList.push(res)
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    // this.productDataService.getProductData(this.addProduct)
   }
 
   onAddProduct() {
-    this.productDataService.setUserData(this.addProduct.value).subscribe(
-      (res) => {
-        console.log(res);
+    this.productDataService.setProductData(this.addProduct.value).subscribe(
+      (res:any) => {
+        console.log(res.name);
+        // this.productList.push(res.name)
+        // console.log(this.productList);
+        // this.userDataService.getUserData(localStorage.getItem('uid')).subscribe(
+        //   (res: any) => {
+        //     console.log(res);
+        //   }, (err: any) => {
+        //     console.log(err);
+          // }
+        // )
+        
+        this.userDataService.pushProductId(localStorage.getItem('uid'), res.name).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log(err);
+          }
+        )
       },
-      (err) => {
+      (err:any) => {
         console.log(err);
       }
-    );
+    )
+   
   }
 }

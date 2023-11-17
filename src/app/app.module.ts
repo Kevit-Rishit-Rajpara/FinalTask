@@ -15,9 +15,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SellerComponent } from './seller/seller.component';
 import { BecomeSellerComponent } from './nav/become-seller/become-seller.component';
 import { ProductDetailComponent } from './home/product-detail/product-detail.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, HomeComponent, NavComponent, SellerComponent, BecomeSellerComponent, ProductDetailComponent ],
+  declarations: [AppComponent, AuthComponent, HomeComponent, NavComponent, SellerComponent, BecomeSellerComponent, ProductDetailComponent, CartComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,

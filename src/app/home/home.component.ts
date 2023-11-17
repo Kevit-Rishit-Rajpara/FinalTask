@@ -1,15 +1,25 @@
-import { Component } from '@angular/core';
-import { Product } from '../product.model';
+import { Component, OnInit } from '@angular/core';
+import { ProductDataService } from '../productdata.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
-  
+export class HomeComponent implements OnInit {
+  constructor(
+    private productDataService: ProductDataService,
+    private router: Router
+  ) {}
   discPer(actualPrice: any, discPrice: any) {
     return Math.ceil((100 * (actualPrice - discPrice)) / actualPrice);
+  }
+
+  ngOnInit(): void {}
+
+  openProduct() {
+    this.router.navigate(['/productDetail']);
   }
 
   products = [

@@ -17,6 +17,8 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {}
   isSeller = localStorage.getItem('isSeller');
+  isLogin = localStorage.getItem('isLogin')
+  showProfile = false
 
   onToggleMenu() {
     console.log('click');
@@ -26,12 +28,15 @@ export class NavComponent implements OnInit {
   }
 
   openPopup(enterAnimationDuration: any, exitAnimationDuration: any) {
-    this.dialog.open(AuthComponent, {
+    const dialogRef = this.dialog.open(AuthComponent, {
       width: '75vw',
       height: '80vh',
       enterAnimationDuration,
       exitAnimationDuration,
     });
+     dialogRef.afterClosed().subscribe((result) => {
+       // Handle any actions after the dialog is closed, if needed
+     });
   }
 
   onBecome() {
@@ -43,5 +48,14 @@ export class NavComponent implements OnInit {
 
   onNavigateSeller() {
     this.router.navigate(['/seller']);
+  }
+  
+  onNavigateCart() {
+    this.router.navigate(['/cart'])
+  }
+
+  onLogout() {
+    // console.log("logout");
+    localStorage.clear();
   }
 }

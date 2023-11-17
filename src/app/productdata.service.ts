@@ -1,19 +1,69 @@
 import { HttpClient } from "@angular/common/http";
+import { HtmlParser } from "@angular/compiler";
 import { Injectable } from "@angular/core";
+import { initializeApp } from "firebase/app";
+import { child, get, getDatabase, ref, set } from "firebase/database";
 
-@Injectable({'providedIn':"root"})
-export class ProductDataService{
-    constructor(private http: HttpClient){}
-    setUserData(data: any) {
-     return this.http.post(
-       'https://web-mart-b76d1-default-rtdb.europe-west1.firebasedatabase.app/Products.json',
-       data
-     );
-    }
-    getUserData() {
-     return this.http.get(
-       'https://web-mart-b76d1-default-rtdb.europe-west1.firebasedatabase.app/Products.json'
-     );
-    }
+@Injectable({ providedIn: 'root' })
+export class ProductDataService {
+  constructor(private http: HttpClient) { }
+  databaseURL = 'https://web-mart-b76d1-default-rtdb.europe-west1.firebasedatabase.app/'
 
+
+  // firebaseConfig = {
+  //   databaseURL:
+  //   'https://web-mart-b76d1-default-rtdb.europe-west1.firebasedatabase.app/',
+  // };
+//   app = initializeApp(this.firebaseConfig);
+//   database = getDatabase(this.app);
+
+
+//   setProductData(id: any,data: any) {
+//    const db = getDatabase();
+//    set(ref(db, 'products/'+ id), data);
+//   }
+
+//   fetchProducts() {
+//     get(
+//     child(
+//       ref(getDatabase()),
+//       `products/`
+//     )
+//   )
+//     .then((snapshot) => {
+//       if (snapshot.exists()) {
+//         console.log(snapshot.val()); 
+//       } else {
+//         console.log('No data available');
+//       }
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+//   }
+  
+//   getProductData(id:any) {
+//   get(
+//     child(
+//       ref(getDatabase()),
+//       `products/${id}`
+//     )
+//   )
+//     .then((snapshot) => {
+//       if (snapshot.exists()) {
+//         console.log(snapshot.val());
+//       } else {
+//         console.log('No data available');
+//       }
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+//   }
+  
+ 
+  
+  setProductData( data: any) {
+     return this.http.post(this.databaseURL + 'Products.json', data)
+  }
 }
