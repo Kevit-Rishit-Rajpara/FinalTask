@@ -3,3 +3,13 @@
   visibility: visible;
   font-size: 0.7rem;
 }
+
+.deleteBtn {
+  color: rgb(134, 56, 56);
+}
+.p-0 {
+  padding: 0 !important;
+}
+.col-2 {
+  column-span: 2 !important;
+}

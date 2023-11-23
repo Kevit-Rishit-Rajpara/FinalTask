@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormArrayName, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormArrayName,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { UserDataService } from '../userData.service';
 import { NavComponent } from '../nav/nav.component';
 import { MatDialogRef } from '@angular/material/dialog';
+import { getLocaleMonthNames } from '@angular/common';
 
 @Component({
   selector: 'app-auth',
@@ -31,7 +38,7 @@ export class AuthComponent implements OnInit {
     });
 
     this.signUpForm = new FormGroup({
-      isSeller: new FormControl(null),
+      isSeller: new FormControl('false'),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [
         Validators.required,
@@ -45,23 +52,49 @@ export class AuthComponent implements OnInit {
       ]),
       city: new FormControl(null, Validators.required),
       uid: new FormControl(null),
-      products : new FormArray([])
+      myProducts: new FormArray([]),
+      cart: new FormArray([]),
     });
   }
 
   getProductArray() {
-    return this.signUpForm.get('products') as FormArray
+    return this.signUpForm.get('products') as FormArray;
   }
 
   onLogin() {
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
     this.authServie
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
         (res: any) => {
           localStorage.setItem('isLogin', 'true');
-          console.log(res);
-          localStorage.setItem('uid', res.localId);
+          // localStorage.setItem('uid', res.localId);
+          this.userDataService.getmyUser(this.loginForm.value.email).subscribe(
+            (res) => {
+              // console.log(res);
+
+              this.userDataService.currentUser = res;
+              console.log(this.userDataService.currentUser);
+              // console.log(this.userDataService.currentUser[0].cart);
+              localStorage.setItem(
+                'id',
+                this.userDataService.currentUser[0].id
+              );
+              localStorage.setItem(
+                'isSeller',
+                this.userDataService.currentUser[0].isSeller
+              );
+              this.userDataService.currentCart.cart =
+                this.userDataService.currentUser[0].cart;
+              console.log(this.userDataService.currentCart);
+              this.userDataService.currentMyProducts.myProducts =
+                this.userDataService.currentUser[0].myProducts;
+              console.log(this.userDataService.currentMyProducts);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
           this.loginForm.reset();
           this.dialogRef.close();
           alert('Login Successfully');
@@ -79,29 +112,27 @@ export class AuthComponent implements OnInit {
       .subscribe(
         (res: any) => {
           console.log(res);
-          this.signUpForm.value.uid = res.localId
-          console.log(this.signUpForm.value + "Special");
-          
-          this.userDataService
-            .setUserData( this.signUpForm.value )
-            .subscribe(
-              (res:any) => {
-                console.log(res)
-                this.signUpForm.reset();
-                 this.dialogRef.close();
-                alert('successfully signed up');
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
+          this.signUpForm.value.uid = res.localId;
+          // console.log(this.signUpForm.value + "Special");
+          this.userDataService.setUserData(this.signUpForm.value).subscribe(
+            (res: any) => {
+              console.log(res);
+            },
+            (err: any) => {
+              console.log(err);
+            }
+          );
         },
         (err: any) => {
           console.log('Error ' + err);
           alert(err);
         }
       );
-
     this.router.navigate(['']);
+  }
+
+  addProduct(ele: any) {
+    (<FormArray>this.signUpForm.get('products')).push(ele);
+    console.log(this.signUpForm.value);
   }
 }

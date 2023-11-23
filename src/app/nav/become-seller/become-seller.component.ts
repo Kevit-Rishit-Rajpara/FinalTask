@@ -13,6 +13,7 @@ export class BecomeSellerComponent {
 
   enableSellerMode(enterAnimationDuration: any, exitAnimationDuration: any) {
     if (localStorage.getItem('isLogin')) {
+      
       alert('Now You are Seller');
       localStorage.setItem('isSeller', 'true');
     } else {

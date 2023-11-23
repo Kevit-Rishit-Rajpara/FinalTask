@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthComponent } from '../auth/auth.component';
 import { BecomeSellerComponent } from './become-seller/become-seller.component';
@@ -9,16 +15,30 @@ import { Router } from '@angular/router';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, DoCheck {
   constructor(public dialog: MatDialog, private router: Router) {}
   @ViewChild('dropdownMenu', { static: true }) dropdownMenu:
     | ElementRef
     | undefined;
 
-  ngOnInit(): void {}
   isSeller = localStorage.getItem('isSeller');
-  isLogin = localStorage.getItem('isLogin')
-  showProfile = false
+  isLogin = localStorage.getItem('isLogin');
+  showProfile = false;
+  fName = localStorage.getItem('fName');
+  lName = localStorage.getItem('lName');
+  email = localStorage.getItem('email');
+
+  ngOnInit(): void {
+    console.log(this.isSeller + "   onInit");
+    
+  }
+
+  ngDoCheck() {
+    this.isSeller = localStorage.getItem('isSeller');
+    this.isLogin = localStorage.getItem('isLogin');
+    // console.log(this.isSeller);
+    
+  }
 
   onToggleMenu() {
     console.log('click');
@@ -34,9 +54,8 @@ export class NavComponent implements OnInit {
       enterAnimationDuration,
       exitAnimationDuration,
     });
-     dialogRef.afterClosed().subscribe((result) => {
-       // Handle any actions after the dialog is closed, if needed
-     });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
   }
 
   onBecome() {
@@ -49,13 +68,12 @@ export class NavComponent implements OnInit {
   onNavigateSeller() {
     this.router.navigate(['/seller']);
   }
-  
+
   onNavigateCart() {
-    this.router.navigate(['/cart'])
+    this.router.navigate(['/cart']);
   }
 
   onLogout() {
-    // console.log("logout");
     localStorage.clear();
   }
 }

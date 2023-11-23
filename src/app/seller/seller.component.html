@@ -1,71 +1,159 @@
-<div class="mx-auto w-[50vw] py-10">
+<div class="W-[50vw]  sm:w-[80vw] md:w-[65vw] lg:w-[60vw] mx-auto">
+    <div class=" py-10">
 
-    <h1 class="text-4xl py-3 font-extrabold dark:text-white">Add Product</h1>
+        <h1 class="text-4xl py-3 font-extrabold dark:text-white">Add Product</h1>
 
-    <form class="p-10 rounded-xl bg-orange-100 flex flex-col gap-2" [formGroup]="addProduct" (ngSubmit)="onAddProduct()"> 
-        <div class="relative z-0 w-full mb-2 pb-2 group">
-            <input type="text" formControlName="name" name="name" id="name"
-                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
-                 required />
-            <label for="name"
-                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Product
-                Name</label>
-                <span class="error" *ngIf="!addProduct.get('name')?.valid && addProduct.get('name')?.touched">required</span>
-        </div>
+        <form class="p-10 rounded-xl bg-orange-100 flex flex-col gap-2"
+            [formGroup]="addProduct" (ngSubmit)="onAddProduct()">
+            <div class="md:grid md:grid-cols-2 md:gap-8">
+                <div
+                    class="relative z-0 w-full mb-2 pb-2 group">
+                    <input type="text" formControlName="name" name="name"
+                        id="name"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        required />
+                    <label for="name"
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Product
+                        Name</label>
+                    <span class="error"
+                        *ngIf="!addProduct.get('name')?.valid && addProduct.get('name')?.touched">required</span>
+                </div>
+                <div
+                    class="relative z-0 w-full mb-2 pb-2 group">
+                    <input type="text" formControlName="category"
+                        name="category"
+                        id="category"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        required />
+                    <label for="category"
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Product
+                        Category</label>
+                    <span class="error"
+                        *ngIf="!addProduct.get('category')?.valid && addProduct.get('category')?.touched">required</span>
+                </div>
 
-        <div class="relative z-0 w-full mb-2 pb-2 group">
-            <input type="text" name="description" id="description"
-                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
-                 required formControlName="description" />
-            <label for="description"
-                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description</label>
-                <span class="error" *ngIf="!addProduct.get('description')?.valid && addProduct.get('description')?.touched">required</span>
-        </div>
-
-        <div class="relative z-0 w-full mb-2 pb-2 group">
-            <input type="url" name="imgUrl" id="imgUrl"
-                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
-                 formControlName="imgUrl" required />
-            <label for="imgUrl"
-                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Image
-                url</label>
-                <span class="error" *ngIf="!addProduct.get('imgUrl')?.valid && addProduct.get('imgUrl')?.touched">required</span>
-        </div>
-
-
-        <div class="grid md:grid-cols-3 md:gap-6">
+            </div>
             <div class="relative z-0 w-full mb-2 pb-2 group">
-                <input type="text" name="actualPrice" id="actualPrice"
+                <input type="text" name="description" id="description"
                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
-                     required formControlName="actualPrice" />
-                <label for="actualPrice"
-                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Actual
-                    Price</label>
-                     <span class="error" *ngIf="!addProduct.get('actualPrice')?.valid && addProduct.get('actualPrice')?.touched">required</span>
+                    required formControlName="description" />
+                <label for="description"
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description</label>
+                <span class="error"
+                    *ngIf="!addProduct.get('description')?.valid && addProduct.get('description')?.touched">required</span>
             </div>
 
             <div class="relative z-0 w-full mb-2 pb-2 group">
-                <input type="text" name="discPrice" id="discPrice"
+                <input type="url" name="imgUrl" id="imgUrl"
                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
-                     required formControlName="discPrice" />
-                <label for="discPrice"
-                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Discount
-                    Price</label>
-                    <span class="error" *ngIf="!addProduct.get('discPrice')?.valid && addProduct.get('discPrice')?.touched" >Must less than ActualPrice</span>
+                    formControlName="imgUrl" required />
+                <label for="imgUrl"
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Image
+                    url</label>
+                <span class="error"
+                    *ngIf="!addProduct.get('imgUrl')?.valid && addProduct.get('imgUrl')?.touched">required</span>
             </div>
 
-            <div class="relative z-0 w-full mb-2 pb-2 group">
-                <input type="number" name="quantity" id="quantity"
-                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
-                     required formControlName="quantity" />
-                <label for="quantity"
-                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Quantity</label>
-                    <span class="error" *ngIf="!addProduct.get('quantity')?.valid && addProduct.get('quantity')?.touched">Positive Number Only</span>
+            <div class="grid md:grid-cols-3 md:gap-6">
+                <div class="relative z-0 w-full mb-2 pb-2 group">
+                    <input type="text" name="actualPrice" id="actualPrice"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        required formControlName="actualPrice" />
+                    <label for="actualPrice"
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Actual
+                        Price</label>
+                    <span class="error"
+                        *ngIf="!addProduct.get('actualPrice')?.valid && addProduct.get('actualPrice')?.touched">required</span>
+                </div>
+
+                <div class="relative z-0 w-full mb-2 pb-2 group">
+                    <input type="text" name="discPrice" id="discPrice"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        required formControlName="discPrice" />
+                    <label for="discPrice"
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Discount
+                        Price</label>
+                    <span class="error"
+                        *ngIf="!addProduct.get('discPrice')?.valid && addProduct.get('discPrice')?.touched">Must
+                        less than ActualPrice</span>
+                </div>
+
+                <div class="relative z-0 w-full mb-2 pb-2 group">
+                    <input type="number" name="quantity" id="quantity"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        required formControlName="quantity" />
+                    <label for="quantity"
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Quantity</label>
+                    <span class="error"
+                        *ngIf="!addProduct.get('quantity')?.valid && addProduct.get('quantity')?.touched">Positive
+                        Number Only</span>
+                </div>
             </div>
+
+            <button type="submit"
+                class=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Submit</button>
+        </form>
+
+    </div>
+
+    <div class="mx-auto py-10">
+
+        <h1 class="text-4xl py-3 font-extrabold dark:text-white">My Products</h1>
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table
+                class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-2 py-3">
+                            Product name
+                        </th>
+                        <th scope="col" class="px-2 py-3">
+
+                            Quantity
+
+                        </th>
+                        <th scope="col" class="px-2 py-3">
+                            Category
+
+                        </th>
+                        <th scope="col" class="px-2 py-3">
+                            Price
+
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="myProducts.length === 0">
+                        <td colspan="5">
+
+                            <span
+                                class="w-full p-3 text-xl flex justify-center align-middle">Nothing</span>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let myProduct of myProducts"
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row"
+                            class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{myProduct.name}}
+                        </th>
+                        <td class="px-2 py-4">
+                            {{myProduct.quantity}}
+                        </td>
+                        <td class="px-2 py-4">
+                            {{myProduct.actualPrice}}
+                        </td>
+                        <td class="px-2 py-4">
+                            {{myProduct.discPrice}}
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
         </div>
 
-        <button type="submit"
-            class=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Submit</button>
-    </form>
-
+    </div>
 </div>

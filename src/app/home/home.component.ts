@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductDataService } from '../productdata.service';
 import { Router } from '@angular/router';
+import { UserDataService } from '../userData.service';
 
 @Component({
   selector: 'app-home',
@@ -8,292 +9,68 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  event: any;
+  id!: number;
   constructor(
     private productDataService: ProductDataService,
+    private userDataService: UserDataService,
     private router: Router
   ) {}
   discPer(actualPrice: any, discPrice: any) {
     return Math.ceil((100 * (actualPrice - discPrice)) / actualPrice);
   }
 
-  ngOnInit(): void {}
+  homeProducts: Array<any> = [];
 
-  openProduct() {
-    this.router.navigate(['/productDetail']);
+  ngOnInit(): void {
+    this.userDataService.getUser().subscribe(
+      (res) => {
+        // console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    this.productDataService.getProductsData().subscribe(
+      (res: any) => {
+        for (let i = 0; i < Object.keys(res).length; i++) {
+          this.homeProducts.push(Object.values(res)[i]);
+        }
+        // console.log(this.homeProducts);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
-  products = [
-    {
-      name: 'T-shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 2000,
-      discPrice: 200,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'Shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 200,
-      discPrice: 200,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'Pant',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 270,
-      discPrice: 100,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'T-shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 200,
-      discPrice: 120,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'T-shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 300,
-      discPrice: 100,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'T-shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 2000,
-      discPrice: 400,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'Shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 200,
-      discPrice: 110,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'Pant',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 270,
-      discPrice: 100,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'T-shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 200,
-      discPrice: 120,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'T-shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 300,
-      discPrice: 100,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'T-shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 2000,
-      discPrice: 400,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'Shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 200,
-      discPrice: 110,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'Pant',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/8/i/i/10-rso132a-red-tape-white-original-imag9wgqahxfnzup.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/m/h/10-rso132a-red-tape-white-original-imag9wgqnwdf6hsk.jpeg?q=70',
-      ],
-      actualPrice: 270,
-      discPrice: 100,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'T-shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 200,
-      discPrice: 120,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-    {
-      name: 'T-shirt',
-      shortDesc: 'Shirt for Mens',
-      description:
-        'a Men Shirt Has been Red color and it has 3 sizes and 5 colors available',
-      category: 'Clothing',
-      imageUrl: [
-        'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/u/q/-original-imagtbtfuxvu9c2y.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/w/w/o/10-rso132a-red-tape-white-original-imag9wgqdeh77rph.jpeg?q=70',
-        'https://rukminim2.flixcart.com/image/832/832/kxgfzbk0/shoe/g/f/f/10-rso132a-red-tape-white-original-imag9wgqbhr72qzv.jpeg?q=70',
-      ],
-      actualPrice: 300,
-      discPrice: 100,
-      quantity: 20,
-      sizes: ['m', 'l', 'xl'],
-      colors: ['red', 'brown', 'yellow'],
-      rating: [3, 4, 2, 1, 5, 5],
-    },
-  ];
+  openProduct(i: any) {
+    this.router.navigate(['/productDetail']);
+    console.log(i);
+  }
+
+  addToCart(i: any, event: Event) {
+    event.stopPropagation();
+    console.log(i);
+    // console.log('Product added to Cart');
+    this.id = this.homeProducts[i];
+    console.log(this.homeProducts[i].id);
+    // this.userDataService.currentCart.cart.push(this.id);
+    this.userDataService.currentCart['cart'].push(this.id);
+    this.userDataService.currentUser.cart = this.userDataService.currentCart;
+    this.userDataService
+      .pushProductId(
+        localStorage.getItem('id'),
+        this.userDataService.currentCart
+      )
+      .subscribe(
+        (res) => {
+          // this.userDataService.currentCart.push(res)
+          console.log(res);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductDataService } from '../productdata.service';
-import { HttpClient } from '@angular/common/http';
 import { UserDataService } from '../userData.service';
 
 @Component({
@@ -16,20 +15,23 @@ export class SellerComponent implements OnInit {
   ngOnInit(): void {
     this.addProduct = new FormGroup({
       name: new FormControl(null, Validators.required),
+      category: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
       imgUrl: new FormControl(null, Validators.required),
       actualPrice: new FormControl(null, Validators.required),
       discPrice: new FormControl(null, [Validators.required]),
       quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
     });
-    this.fetchProducts()
+    this.fetchMyProducts()
   }
 
-  productList: Array<any> = [];
+  myProducts: Array<any> = [];
+  userDetails  = {}
 
-  fetchProducts() {
-
-    // this.productDataService.fetchProducts();
+  fetchMyProducts() {
+    this.myProducts = this.userDataService.currentMyProducts.myProducts
+    console.log(this.myProducts);
+    
   }
 
 
@@ -39,26 +41,18 @@ export class SellerComponent implements OnInit {
 
   onAddProduct() {
     this.productDataService.setProductData(this.addProduct.value).subscribe(
-      (res:any) => {
-        console.log(res.name);
-        // this.productList.push(res.name)
-        // console.log(this.productList);
-        // this.userDataService.getUserData(localStorage.getItem('uid')).subscribe(
-        //   (res: any) => {
-        //     console.log(res);
-        //   }, (err: any) => {
-        //     console.log(err);
-          // }
-        // )
+      (res: any) => {
+        this.addProduct.reset()
+        // console.log(res);
+        // this.myProduct.push(res.name)
+        // console.log(this.myProduct);
+        // this.authComponent.addProduct(res.name)
+        this.userDataService.currentMyProducts.myProducts.push(res)
+        console.log(this.userDataService.currentMyProducts.myProducts);
+        this.userDataService.pushProductId(localStorage.getItem('id'),this.userDataService.currentMyProducts).subscribe(res =>{console.log(res);
+        }, err =>{ console.log(err);
+        })
         
-        this.userDataService.pushProductId(localStorage.getItem('uid'), res.name).subscribe(
-          res => {
-            console.log(res);
-          },
-          err => {
-            console.log(err);
-          }
-        )
       },
       (err:any) => {
         console.log(err);

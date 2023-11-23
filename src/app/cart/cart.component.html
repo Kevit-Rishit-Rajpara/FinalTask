@@ -52,18 +52,25 @@
             </tr>
         </thead>
         <tbody class="text-xs md:text-base">
-            <tr
+            <tr *ngIf="myCart.length === 0">
+                <td colspan="5">
+
+                    <span class="w-full p-3 text-xl flex justify-center align-middle">Nothing</span>
+                </td>
+            </tr>
+            <tr *ngFor="let product of myCart, let i = index"
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row"
                     class="px-1 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <!-- <img class="h-10" src="https://m.media-amazon.com/images/I/71Ishj3CaoL._SX679_.jpg" alt=""> -->
-                    <span>Apple MacBook Pro 17"</span>
+                    <!-- <span>Apple MacBook Pro 17"</span> -->
+                    <span> {{product.description}} </span>
                 </th>
                 <td class="px-1 sm:px-6 py-4 hidden md:inline-block">
-                    Laptop
+                    {{product.name}}
                 </td>
                 <td class="px-1 sm:px-6 py-4">
-                    $2999
+                    {{product.discPrice}}
                 </td>
                 <td class="px-1 sm:px-6 py-4 ">
                     <div
@@ -81,73 +88,10 @@
                     </div>
                 </td>
                 <td class="sm:px-6 py-4">
-                    $2999
+                    {{subtotalPerProduct(product.discPrice, value)}}
                 </td>
             </tr>
-            <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row"
-                    class="px-1 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
-                </th>
 
-                <td class="px-1 sm:px-6 py-4 hidden md:block">
-                    Laptop PC
-                </td>
-                <td class="px-1 sm:px-6 py-4">
-                    $1999
-                </td>
-                <td class="px-1 sm:px-6 py-4 ">
-                    <div
-                        class="grid grid-cols-3 justify-items-center w-12 h-8 sm:w-24 lg:h-5vh rounded-lg text-xl border-solid border border-amber-500">
-                        <button
-                            class=" w-full border-none rounded-l-lg  hover:bg-amber-500 text-amber-700 hover:text-white"
-                            (click)="handleMinus()">-</button>
-                        <input type="number"
-                            class=" w-full text-xs sm:text-base"
-                            value="0"
-                            [(ngModel)]="value" />
-                        <button
-                            class="w-full  border-none rounded-r-lg  hover:bg-amber-500 text-amber-700 hover:text-white"
-                            (click)="handlePlus()">+</button>
-                    </div>
-                </td>
-                <td class="px-1 sm:px-6 py-4">
-                    $1999
-                </td>
-            </tr>
-            <tr
-                class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row"
-                    class="px-1 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Magic Mouse 2
-                </th>
-
-                <td class="px-1 sm:px-6 py-4 hidden md:block">
-                    Accessories
-                </td>
-                <td class="px-1 sm:px-6 py-4">
-                    $99
-                </td>
-                <td class="px-1 sm:px-6 py-4 ">
-                    <div
-                        class="grid grid-cols-3 justify-items-center w-12 h-8 sm:w-24 lg:h-5vh rounded-lg text-xl border-solid border border-amber-500">
-                        <button
-                            class=" w-full border-none rounded-l-lg  hover:bg-amber-500 text-amber-700 hover:text-white"
-                            (click)="handleMinus()">-</button>
-                        <input type="number"
-                            class=" w-full text-xs sm:text-base"
-                            value="0"
-                            [(ngModel)]="value" />
-                        <button
-                            class="w-full  border-none rounded-r-lg  hover:bg-amber-500 text-amber-700 hover:text-white"
-                            (click)="handlePlus()">+</button>
-                    </div>
-                </td>
-                <td class="px-1 sm:px-6 py-4">
-                    $99
-                </td>
-            </tr>
         </tbody>
     </table>
 </div>
@@ -156,7 +100,8 @@
     class="w-[95vw] sm:w-[90vw] md:w-[80vw] lg:w-[70vw] mx-auto my-10 p-2 sm:p-5 border rounded-lg">
     <h3 class="text-lg font-extrabold">Cart total</h3>
     <hr class="my-6">
-    <div class=" flex flex-col gap-4  md:w-[70%] lg:w-[60%] xl:w-[50%] sm:mx-auto">
+    <div
+        class=" flex flex-col gap-4  md:w-[70%] lg:w-[60%] xl:w-[50%] sm:mx-auto">
         <div class="sm:mx-10 flex justify-between">
             <span class="font-semibold">Subtotal</span>
             <span>$4000</span>
@@ -177,5 +122,7 @@
         </div>
     </div>
     <hr class="my-6">
-        <button class="w-[80%] sm:w-[50%] md:w-[40%] lg:w-[30%] xl:w-[20%] bg-green-300 text-zinc-900 p-1 rounded-md">Procced to Buy</button>
+    <button
+        class="w-[80%] sm:w-[50%] md:w-[40%] lg:w-[30%] xl:w-[20%] bg-green-300 text-zinc-900 p-1 rounded-md">Procced
+        to Buy</button>
 </div>
