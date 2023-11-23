@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
-  FormArrayName,
   FormControl,
   FormGroup,
   Validators,
@@ -11,7 +10,7 @@ import { AuthService } from './auth.service';
 import { UserDataService } from '../userData.service';
 import { NavComponent } from '../nav/nav.component';
 import { MatDialogRef } from '@angular/material/dialog';
-import { getLocaleMonthNames } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-auth',
@@ -68,40 +67,72 @@ export class AuthComponent implements OnInit {
       .subscribe(
         (res: any) => {
           localStorage.setItem('isLogin', 'true');
-          // localStorage.setItem('uid', res.localId);
-          this.userDataService.getmyUser(this.loginForm.value.email).subscribe(
-            (res) => {
-              // console.log(res);
-
-              this.userDataService.currentUser = res;
-              console.log(this.userDataService.currentUser);
-              // console.log(this.userDataService.currentUser[0].cart);
-              localStorage.setItem(
-                'id',
-                this.userDataService.currentUser[0].id
-              );
-              localStorage.setItem(
-                'isSeller',
-                this.userDataService.currentUser[0].isSeller
-              );
-              this.userDataService.currentCart.cart =
-                this.userDataService.currentUser[0].cart;
-              console.log(this.userDataService.currentCart);
-              this.userDataService.currentMyProducts.myProducts =
-                this.userDataService.currentUser[0].myProducts;
-              console.log(this.userDataService.currentMyProducts);
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
             },
-            (err) => {
-              console.log(err);
-            }
-          );
+          });
+          Toast.fire({
+            icon: 'success',
+            title: 'Login successfully',
+          });
+          // localStorage.setItem('uid', res.localId);
+          this.userDataService
+            .getUserByEmail(this.loginForm.value.email)
+            .subscribe(
+              (res) => {
+                // console.log(res);
+
+                this.userDataService.currentUser = res;
+                console.log(this.userDataService.currentUser);
+                // console.log(this.userDataService.currentUser[0]);
+                localStorage.setItem(
+                  'id',
+                  this.userDataService.currentUser[0].id
+                );
+                localStorage.setItem(
+                  'isSeller',
+                  this.userDataService.currentUser[0].isSeller
+                );
+                this.userDataService.currentCart.cart =
+                  this.userDataService.currentUser[0].cart;
+                console.log(this.userDataService.currentCart);
+                this.userDataService.currentMyProducts.myProducts =
+                  this.userDataService.currentUser[0].myProducts;
+                console.log(this.userDataService.currentMyProducts);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
           this.loginForm.reset();
           this.dialogRef.close();
-          alert('Login Successfully');
+          // alert('Login Successfully');
         },
         (err: any) => {
           console.log('Error ' + err);
-          alert(err);
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          });
+          Toast.fire({
+            icon: 'error',
+            title: err,
+          });
+          // alert(err);
         }
       );
   }
@@ -112,6 +143,21 @@ export class AuthComponent implements OnInit {
       .subscribe(
         (res: any) => {
           console.log(res);
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          });
+          Toast.fire({
+            icon: 'success',
+            title: 'Signed in successfully',
+          });
           this.signUpForm.value.uid = res.localId;
           // console.log(this.signUpForm.value + "Special");
           this.userDataService.setUserData(this.signUpForm.value).subscribe(
@@ -125,7 +171,22 @@ export class AuthComponent implements OnInit {
         },
         (err: any) => {
           console.log('Error ' + err);
-          alert(err);
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          });
+          Toast.fire({
+            icon: 'error',
+            title: err,
+          });
+          // alert(err);
         }
       );
     this.router.navigate(['']);

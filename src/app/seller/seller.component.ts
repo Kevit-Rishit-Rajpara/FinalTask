@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductDataService } from '../productdata.service';
 import { UserDataService } from '../userData.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-seller',
@@ -11,7 +12,10 @@ import { UserDataService } from '../userData.service';
 export class SellerComponent implements OnInit {
   addProduct!: FormGroup;
 
-  constructor(private productDataService: ProductDataService, private userDataService : UserDataService) {}
+  constructor(
+    private productDataService: ProductDataService,
+    private userDataService: UserDataService
+  ) {}
   ngOnInit(): void {
     this.addProduct = new FormGroup({
       name: new FormControl(null, Validators.required),
@@ -22,18 +26,25 @@ export class SellerComponent implements OnInit {
       discPrice: new FormControl(null, [Validators.required]),
       quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
     });
-    this.fetchMyProducts()
+    this.fetchMyProducts();
   }
 
   myProducts: Array<any> = [];
-  userDetails  = {}
+  userDetails = {};
 
   fetchMyProducts() {
-    this.myProducts = this.userDataService.currentMyProducts.myProducts
-    console.log(this.myProducts);
-    
+    this.userDataService.getUserById(localStorage.getItem('id')).subscribe(
+      (res: any) => {
+        this.myProducts = res.myProducts;
+        // console.log(res.myProducts);
+        
+      },
+      err => {
+        console.log(err);
+        
+      }
+    )
   }
-
 
   getProductsData() {
     // this.productDataService.getProductData(this.addProduct)
@@ -42,22 +53,46 @@ export class SellerComponent implements OnInit {
   onAddProduct() {
     this.productDataService.setProductData(this.addProduct.value).subscribe(
       (res: any) => {
-        this.addProduct.reset()
+        this.addProduct.reset();
         // console.log(res);
         // this.myProduct.push(res.name)
         // console.log(this.myProduct);
         // this.authComponent.addProduct(res.name)
-        this.userDataService.currentMyProducts.myProducts.push(res)
+        this.userDataService.currentMyProducts.myProducts.push(res);
         console.log(this.userDataService.currentMyProducts.myProducts);
-        this.userDataService.pushProductId(localStorage.getItem('id'),this.userDataService.currentMyProducts).subscribe(res =>{console.log(res);
-        }, err =>{ console.log(err);
-        })
-        
+        this.userDataService
+          .pushProductId(
+            localStorage.getItem('id'),
+            this.userDataService.currentMyProducts
+          )
+          .subscribe(
+            (res) => {
+              // console.log(res);
+              this.fetchMyProducts()
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer);
+                  toast.addEventListener('mouseleave', Swal.resumeTimer);
+                },
+              });
+              Toast.fire({
+                icon: 'success',
+                title: 'Product added successfully',
+              });
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
       },
-      (err:any) => {
+      (err: any) => {
         console.log(err);
       }
-    )
-   
+    );
   }
 }

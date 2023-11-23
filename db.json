@@ -13,7 +13,7 @@
         {
           "name": "Banana",
           "category": "fruit",
-          "description": "Cricket bat length 5\"",
+          "description": "Cricket bat length 5",
           "imgUrl": "https://m.media-amazon.com/images/I/71Ishj3CaoL._AC_UL320_.jpg",
           "actualPrice": "600",
           "discPrice": null,
@@ -21,6 +21,73 @@
           "id": 13
         }
       ],
+      "cart": [
+        {
+          "actualPrice": "30000",
+          "description": "a Washing Machine ",
+          "discPrice": "25000",
+          "imgUrl": "https://m.media-amazon.com/images/I/41IWcClcFnL._AC_UF226,226_FMjpg_.jpg",
+          "name": "Electronics",
+          "category": "home",
+          "quantity": 5,
+          "id": 7
+        },
+        {
+          "actualPrice": "899",
+          "description": "Orange tshirt",
+          "discPrice": "499",
+          "imgUrl": "https://images-eu.ssl-images-amazon.com/images/I/61813vY-a-L._AC_UL160_SR160,160_.jpg",
+          "name": "tShirt",
+          "category": "cloth",
+          "quantity": 10,
+          "id": 2
+        },
+        {
+          "actualPrice": "649",
+          "description": "Black tshirt",
+          "discPrice": "550",
+          "imgUrl": "https://images-eu.ssl-images-amazon.com/images/I/61ZqGlb46sL._AC_UL160_SR160,160_.jpg",
+          "name": "tshirt",
+          "category": "cloth",
+          "quantity": 10,
+          "id": 3
+        },
+        {
+          "actualPrice": "80000",
+          "description": "S23",
+          "discPrice": "25000",
+          "imgUrl": "https://m.media-amazon.com/images/I/41V4aNRci3L._AC_SR400,600_AGcontrast_.jpg",
+          "name": "Samsung",
+          "category": "phone",
+          "quantity": 5,
+          "id": 4
+        }
+      ],
+      "id": 1
+    },
+    {
+      "isSeller": "true",
+      "email": "seller@gmail.com",
+      "password": "111111",
+      "firstName": "Rishit",
+      "lastName": "Rajpara",
+      "phoneNumber": "8320314737",
+      "city": "Rajkot",
+      "uid": "BN9dkvL6etSv2xZskgVRozEgcok1",
+      "myProducts": [],
+      "cart": [],
+      "id": 2
+    },
+    {
+      "isSeller": "true",
+      "email": "rishit.rajpara@gmail.com",
+      "password": "111111",
+      "firstName": "Rishit",
+      "lastName": "Rajpara",
+      "phoneNumber": "8320314737",
+      "city": "Rajkot",
+      "uid": "EcA2jGeGefgf4L9AGqhaXDx5xRI2",
+      "myProducts": [],
       "cart": [
         {
           "actualPrice": "899",
@@ -43,20 +110,7 @@
           "id": 3
         }
       ],
-      "id": 1
-    },
-    {
-      "isSeller": "false",
-      "email": "seller@gmail.com",
-      "password": "111111",
-      "firstName": "Rishit",
-      "lastName": "Rajpara",
-      "phoneNumber": "8320314737",
-      "city": "Rajkot",
-      "uid": "BN9dkvL6etSv2xZskgVRozEgcok1",
-      "myProducts": [],
-      "cart": [],
-      "id": 2
+      "id": 3
     }
   ],
   "Products": [

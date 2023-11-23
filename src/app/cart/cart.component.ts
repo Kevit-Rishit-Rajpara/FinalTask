@@ -7,42 +7,48 @@ import { UserDataService } from '../userData.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit, DoCheck {
-  myCart: any = this.userDataService.currentCart.cart
-  constructor(private userDataService: UserDataService) { }
-
-
+  myCart: Array<any> = [];
+  constructor(private userDataService: UserDataService) {}
+  a: any;
   ngOnInit(): void {
-    // console.log('init');
-    // console.log(this.myCart);
-    
-    
-    
+    this.userDataService.getUserById(localStorage.getItem('id')).subscribe(
+      (res: any) => {
+        this.myCart = res.cart;
+        for (this.a of this.myCart) {
+          this.a['current_quan'] = 1;
+          console.log(this.a);
+        }
+        console.log(this.myCart);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
   ngDoCheck(): void {
-    console.log(this.userDataService.currentCart.cart);
-    
+    // console.log(this.userDataService.currentCart.cart);
   }
 
-  subtotalPerProduct (price:any, value:any) {
-    return (+price) * (+value) 
+  subtotalPerProduct(price: any, value: any) {
+    return +price * +value;
   }
-
-
 
   // onCartClick(i:any) {
   //   console.log(i);
   // }
 
-  value = 1;
+  value = 1
 
   handleMinus() {
-    if (this.value == 0) {
-      this.value;
-    } else {
-      this.value--;
+    if (this.a.current_quan == 1) {
+      return this.a.current_quan;} else {
+      this.a.current_quan--;
     }
   }
   handlePlus() {
-    this.value++;
+    // this.value++;
+    if (this.a.current_quan < this.a.quantity) {
+      this.a.current_quan++;
+    }
   }
 }

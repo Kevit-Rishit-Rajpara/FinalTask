@@ -11,7 +11,7 @@
         <div
             class="dropdownMenu  flex lg:flex-row gap-2 flex-col m-4 align-middle rounded-sm py-4">
 
-            <div
+            <div *ngIf="isLogin"
                 class="px-7 font-semibold text-slate-800 flex gap-2  cursor-pointer"
                 (click)="onNavigateCart()"><span><svg
                         xmlns="http://www.w3.org/2000/svg" fill="none"
