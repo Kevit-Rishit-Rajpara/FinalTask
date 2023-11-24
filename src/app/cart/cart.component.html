@@ -2,105 +2,122 @@
     <h1 class="p-2 text-xl md:text-2xl font-bold ">Cart</h1>
 </div>
 
-<div
-    class="relative shadow-md sm:rounded-lg w-[95vw] md:w-[80vw] lg:w-[70vw] mx-auto">
-    <table
-        class="w-[100%] text-left rtl:text-right text-gray-500 dark:text-gray-400 text-[1.5vw]">
-        <thead
-            class="text-xs md:text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-1 sm:px-6 py-3 ">
-                    Product name
-                </th>
-                <th scope="col" class="px-1 sm:px-6 py-3 hidden md:block">
-                    Category
-                </th>
-                <th scope="col" class="px-1 sm:px-6 py-3">
-                    Price
-                </th>
-                <th scope="col" class="px-1 sm:px-6 py-3">
-                    <span>Quantity</span>
-                </th>
-                <th scope="col" class="px-1 sm:px-6 py-3">
-                    <span>Subtotal</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody class="text-xs md:text-base">
-            <tr *ngIf="myCart.length === 0">
-                <td colspan="5">
+<div>
 
-                    <span
-                        class="w-full p-3 text-xl flex justify-center align-middle">Nothing</span>
-                </td>
-            </tr>
-            <tr *ngFor="let product of myCart, let i = index"
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row"
-                    class="px-1 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <!-- <img class="h-10" src="https://m.media-amazon.com/images/I/71Ishj3CaoL._SX679_.jpg" alt=""> -->
-                    <!-- <span>Apple MacBook Pro 17"</span> -->
-                    <span> {{product.description}} </span>
-                </th>
-                <td class="px-1 sm:px-6 py-4 hidden md:inline-block">
-                    {{product.name}}
-                </td>
-                <td class="px-1 sm:px-6 py-4">
-                    {{product.discPrice}}
-                </td>
-                <td class="px-1 sm:px-6 py-4 ">
-                    <div
-                        class="grid grid-cols-3 justify-items-center w-12 h-8 sm:w-24 lg:h-5vh rounded-lg text-xl border-solid border border-amber-500">
-                        <button
-                            class=" w-full border-none rounded-l-lg  hover:bg-amber-500 text-amber-700 hover:text-white"
-                            (click)="handleMinus()">-</button>
-                        <input type="number"
-                            class=" w-full text-xs sm:text-base"
-                            value="a.current_quan"
-                            [(ngModel)]="a.current_quan" />
-                        <button
-                            class="w-full  border-none rounded-r-lg  hover:bg-amber-500 text-amber-700 hover:text-white"
-                            (click)="handlePlus()">+</button>
-                    </div>
-                </td>
-                <td class="sm:px-6 py-4">
-                    {{subtotalPerProduct(product.discPrice, value)}}
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-</div>
-
-<div
-    class="w-[95vw] sm:w-[90vw] md:w-[80vw] lg:w-[70vw] mx-auto my-10 p-2 sm:p-5 border rounded-lg">
-    <h3 class="text-lg font-extrabold">Cart total</h3>
-    <hr class="my-6">
     <div
-        class=" flex flex-col gap-4  md:w-[70%] lg:w-[60%] xl:w-[50%] sm:mx-auto">
-        <div class="sm:mx-10 flex justify-between">
-            <span class="font-semibold">Subtotal</span>
-            <span>4000</span>
+        class="relative shadow-md sm:rounded-lg w-[95vw] md:w-[80vw] lg:w-[70vw] mx-auto">
+        <table
+            class="w-[100%] text-left rtl:text-right text-gray-500 dark:text-gray-400 text-[1.5vw]">
+            <thead
+                class="text-xs md:text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-1 sm:px-6 py-3 ">
+                        Product name
+                    </th>
+                    <th scope="col" class="px-1 sm:px-6 py-3 hidden md:block">
+                        Category
+                    </th>
+                    <th scope="col" class="px-1 sm:px-6 py-3">
+                        Price
+                    </th>
+                    <th scope="col" class="px-1 sm:px-6 py-3">
+                        <span>Quantity</span>
+                    </th>
+                    <th scope="col" class="px-1 sm:px-6 py-3">
+                        <span>Subtotal</span>
+                    </th>
+                    <th scope="col" class="px-1 sm:px-6 py-3">
+                        <span>Delete</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="text-xs md:text-base">
+                <tr *ngIf="myCart.length === 0">
+                    <td colspan="5">
+
+                        <span
+                            class="w-full p-3 text-xl flex justify-center align-middle">Nothing</span>
+                    </td>
+                </tr>
+                <tr *ngFor="let product of myCart, let index = index"
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <th scope="row"
+                        class="px-1 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <!-- <img class="h-10" src="https://m.media-amazon.com/images/I/71Ishj3CaoL._SX679_.jpg" alt=""> -->
+                        <!-- <span>Apple MacBook Pro 17"</span> -->
+                        <span> {{product.description}} </span>
+                    </th>
+                    <td class="px-1 sm:px-6 py-4 hidden md:inline-block">
+                        {{product.name}}
+                    </td>
+                    <td class="px-1 sm:px-6 py-4">
+                        {{product.discPrice}}
+                    </td>
+                    <td class="px-1 sm:px-6 py-4 ">
+                        <div
+                            class="grid grid-cols-3 justify-items-center w-12 h-8 sm:w-24 lg:h-5vh rounded-lg text-xl border-solid border border-amber-500">
+                            <button
+                                class=" w-full border-none rounded-l-lg  hover:bg-amber-500 text-amber-700 hover:text-white"
+                                (click)="handleMinus(index)">-</button>
+                            <input type="number"
+                                class=" w-full text-xs sm:text-base"
+                                value="product.current_quan"
+                                [(ngModel)]="product.current_quan" />
+                            <button
+                                class="w-full  border-none rounded-r-lg  hover:bg-amber-500 text-amber-700 hover:text-white"
+                                (click)="handlePlus(index)">+</button>
+                        </div>
+                    </td>
+                    <td class="sm:px-6 py-4">
+                        {{subtotalPerProduct(i,product.discPrice,
+                        product.current_quan)}}
+                    </td>
+                    <td class="sm:px-6 py-4 text-red-600"
+                        (click)="onDelete(index)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 mx-auto">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                        </svg>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div
+            class="w-[95vw] sm:w-[90vw] md:w-[80vw] lg:w-[70vw] mx-auto my-10 p-2 sm:p-5 border rounded-lg bg-slate-50">
+            <h3 class="text-lg font-extrabold">Cart total</h3>
+            <hr class="my-6">
+            <div
+                class=" flex flex-col gap-4  md:w-[70%] lg:w-[60%] xl:w-[50%] sm:mx-auto bg-white p-3 rounded-lg">
+                <div class="sm:mx-10 flex justify-between">
+                    <span class="font-semibold">Subtotal</span>
+                    <span> {{subTotal}} </span>
+                </div>
+                <div class="sm:mx-10 flex justify-between">
+                    <span class="font-semibold">CGST ( 3% )</span>
+                    <span> {{gst}} </span>
+                </div>
+                <div class="sm:mx-10 flex justify-between">
+                    <span class="font-semibold">SGST ( 3% )</span>
+                    <span> {{gst}} </span>
+                </div>
+                <hr class="my-2">
+                <div
+                    class="sm:mx-10 flex justify-between text-lg font-extrabold">
+                    <span>Total amount
+                    </span>
+                    <span> {{Total}} </span>
+                </div>
+            </div>
+            <hr class="my-6">
+            <div class="flex justify-center align-middle">
+                <button (click)="proccedToBuy()"
+                    class="w-[80%] sm:w-[50%] md:w-[40%] lg:w-[30%] xl:w-[20%] bg-green-300 text-zinc-900 p-1 rounded-md">Procced
+                    to Buy</button>
+            </div>
         </div>
-        <div class="sm:mx-10 flex justify-between">
-            <span class="font-semibold">CGST</span>
-            <span>4</span>
-        </div>
-        <div class="sm:mx-10 flex justify-between">
-            <span class="font-semibold">SGST</span>
-            <span>4</span>
-        </div>
-        <hr class="my-2">
-        <div class="sm:mx-10 flex justify-between text-lg font-extrabold">
-            <span>Total amount
-            </span>
-            <span>4008</span>
-        </div>
+
     </div>
-    <hr class="my-6">
-    <div class="flex justify-center align-middle">
-        <button
-            class="w-[80%] sm:w-[50%] md:w-[40%] lg:w-[30%] xl:w-[20%] bg-green-300 text-zinc-900 p-1 rounded-md">Procced
-            to Buy</button>
-    </div>
-</div>

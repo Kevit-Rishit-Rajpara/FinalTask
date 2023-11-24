@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
        this.userDataService.currentCart['cart'].push(this.idDetails);
        // this.userDataService.currentUser.cart = this.userDataService.currentCart;
        this.userDataService
-         .pushProductId(
+         .updateUser(
            localStorage.getItem('id'),
            this.userDataService.currentCart
          )

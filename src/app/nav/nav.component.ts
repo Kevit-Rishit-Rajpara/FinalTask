@@ -27,6 +27,7 @@ export class NavComponent implements OnInit, DoCheck {
   fName = localStorage.getItem('fName');
   lName = localStorage.getItem('lName');
   email = localStorage.getItem('email');
+  displayMenu = false
 
   ngOnInit(): void {
     console.log(this.isSeller + "   onInit");
@@ -36,15 +37,17 @@ export class NavComponent implements OnInit, DoCheck {
   ngDoCheck() {
     this.isSeller = localStorage.getItem('isSeller');
     this.isLogin = localStorage.getItem('isLogin');
+    this.fName = localStorage.getItem('fName')
+    this.lName = localStorage.getItem('lName')
+    this.email = localStorage.getItem('email')
     // console.log(this.isSeller);
     
   }
 
   onToggleMenu() {
     console.log('click');
-    if (this.dropdownMenu) {
-      this.dropdownMenu.nativeElement.style.display = 'visible';
-    }
+    
+    this.displayMenu = !this.displayMenu
   }
 
   openPopup(enterAnimationDuration: any, exitAnimationDuration: any) {
@@ -75,5 +78,6 @@ export class NavComponent implements OnInit, DoCheck {
 
   onLogout() {
     localStorage.clear();
+    this.router.navigate(['/home'])
   }
 }
