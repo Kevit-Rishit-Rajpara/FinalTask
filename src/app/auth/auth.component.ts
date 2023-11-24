@@ -96,6 +96,9 @@ export class AuthComponent implements OnInit {
                   'id',
                   this.userDataService.currentUser[0].id
                 );
+                localStorage.setItem('fName', this.userDataService.currentUser[0].firstName)
+                localStorage.setItem('lName', this.userDataService.currentUser[0].lastName)
+                localStorage.setItem('email', this.userDataService.currentUser[0].email)
                 localStorage.setItem(
                   'isSeller',
                   this.userDataService.currentUser[0].isSeller

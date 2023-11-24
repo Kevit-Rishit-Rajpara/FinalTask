@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthComponent } from 'src/app/auth/auth.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-become-seller',
@@ -13,11 +14,38 @@ export class BecomeSellerComponent {
 
   enableSellerMode(enterAnimationDuration: any, exitAnimationDuration: any) {
     if (localStorage.getItem('isLogin')) {
-      
-      alert('Now You are Seller');
+       const Toast = Swal.mixin({
+         toast: true,
+         position: 'top-end',
+         showConfirmButton: false,
+         timer: 1500,
+         timerProgressBar: true,
+         didOpen: (toast) => {
+           toast.addEventListener('mouseenter', Swal.stopTimer);
+           toast.addEventListener('mouseleave', Swal.resumeTimer);
+         },
+       });
+       Toast.fire({
+         icon: 'success',
+         title: 'Now You are Seller',
+       });
       localStorage.setItem('isSeller', 'true');
     } else {
-      alert('you need to login First');
+       const Toast = Swal.mixin({
+         toast: true,
+         position: 'top-end',
+         showConfirmButton: false,
+         timer: 2500,
+         timerProgressBar: true,
+         didOpen: (toast) => {
+           toast.addEventListener('mouseenter', Swal.stopTimer);
+           toast.addEventListener('mouseleave', Swal.resumeTimer);
+         },
+       });
+       Toast.fire({
+         icon: 'error',
+         title: 'You need to login First',
+       });
       this.dialog.open(AuthComponent, {
         width: '75vw',
         height: '80vh',

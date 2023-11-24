@@ -25,6 +25,8 @@ export class SellerComponent implements OnInit {
       actualPrice: new FormControl(null, Validators.required),
       discPrice: new FormControl(null, [Validators.required]),
       quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
+      current_Quantity : new FormControl(null),
+      perticularSubTotal : new FormControl(null)
     });
     this.fetchMyProducts();
   }
@@ -61,14 +63,14 @@ export class SellerComponent implements OnInit {
         this.userDataService.currentMyProducts.myProducts.push(res);
         console.log(this.userDataService.currentMyProducts.myProducts);
         this.userDataService
-          .pushProductId(
+          .updateUser(
             localStorage.getItem('id'),
             this.userDataService.currentMyProducts
           )
           .subscribe(
             (res) => {
               // console.log(res);
-              this.fetchMyProducts()
+              this.fetchMyProducts();
               const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',

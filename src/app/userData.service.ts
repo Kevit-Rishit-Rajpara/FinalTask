@@ -16,6 +16,7 @@ export class UserDataService {
   currentCart: { cart: number[] } = {
     cart: [],
   };
+
   currentMyProducts: { myProducts: any[] } = {
     myProducts: [],
   };
@@ -36,7 +37,7 @@ export class UserDataService {
     return this.http.get(this.userDatabaseUrl);
   }
 
-  pushProductId(id: any, data: any) {
+  updateUser(id: any, data: any) {
     return this.http.patch(this.userDatabaseUrl + id, data);
   }
 }

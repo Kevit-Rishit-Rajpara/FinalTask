@@ -13,57 +13,19 @@
         {
           "name": "Banana",
           "category": "fruit",
-          "description": "Cricket bat length 5",
+          "description": "aaaaa",
           "imgUrl": "https://m.media-amazon.com/images/I/71Ishj3CaoL._AC_UL320_.jpg",
           "actualPrice": "600",
-          "discPrice": null,
-          "quantity": null,
-          "id": 13
+          "discPrice": "450",
+          "quantity": 5,
+          "current_Quantity": null,
+          "perticularSubTotal": null,
+          "id": 11
         }
       ],
-      "cart": [
-        {
-          "actualPrice": "30000",
-          "description": "a Washing Machine ",
-          "discPrice": "25000",
-          "imgUrl": "https://m.media-amazon.com/images/I/41IWcClcFnL._AC_UF226,226_FMjpg_.jpg",
-          "name": "Electronics",
-          "category": "home",
-          "quantity": 5,
-          "id": 7
-        },
-        {
-          "actualPrice": "899",
-          "description": "Orange tshirt",
-          "discPrice": "499",
-          "imgUrl": "https://images-eu.ssl-images-amazon.com/images/I/61813vY-a-L._AC_UL160_SR160,160_.jpg",
-          "name": "tShirt",
-          "category": "cloth",
-          "quantity": 10,
-          "id": 2
-        },
-        {
-          "actualPrice": "649",
-          "description": "Black tshirt",
-          "discPrice": "550",
-          "imgUrl": "https://images-eu.ssl-images-amazon.com/images/I/61ZqGlb46sL._AC_UL160_SR160,160_.jpg",
-          "name": "tshirt",
-          "category": "cloth",
-          "quantity": 10,
-          "id": 3
-        },
-        {
-          "actualPrice": "80000",
-          "description": "S23",
-          "discPrice": "25000",
-          "imgUrl": "https://m.media-amazon.com/images/I/41V4aNRci3L._AC_SR400,600_AGcontrast_.jpg",
-          "name": "Samsung",
-          "category": "phone",
-          "quantity": 5,
-          "id": 4
-        }
-      ],
-      "id": 1
+      "cart": [],
+      "id": 1,
+      "quantity": 4
     },
     {
       "isSeller": "true",
@@ -88,29 +50,21 @@
       "city": "Rajkot",
       "uid": "EcA2jGeGefgf4L9AGqhaXDx5xRI2",
       "myProducts": [],
-      "cart": [
-        {
-          "actualPrice": "899",
-          "description": "Orange tshirt",
-          "discPrice": "499",
-          "imgUrl": "https://images-eu.ssl-images-amazon.com/images/I/61813vY-a-L._AC_UL160_SR160,160_.jpg",
-          "name": "tShirt",
-          "category": "cloth",
-          "quantity": 10,
-          "id": 2
-        },
-        {
-          "actualPrice": "649",
-          "description": "Black tshirt",
-          "discPrice": "550",
-          "imgUrl": "https://images-eu.ssl-images-amazon.com/images/I/61ZqGlb46sL._AC_UL160_SR160,160_.jpg",
-          "name": "tshirt",
-          "category": "cloth",
-          "quantity": 10,
-          "id": 3
-        }
-      ],
+      "cart": [],
       "id": 3
+    },
+    {
+      "isSeller": false,
+      "email": "tester@gmail.com",
+      "password": "111111",
+      "firstName": "rr",
+      "lastName": "Rajpara",
+      "phoneNumber": "8320314737",
+      "city": null,
+      "uid": "3rORi6PxGYf8rztVEfn9QRQzB6W2",
+      "myProducts": [],
+      "cart": [],
+      "id": 4
     }
   ],
   "Products": [
@@ -121,7 +75,7 @@
       "imgUrl": "https://images-eu.ssl-images-amazon.com/images/I/6195UIowL4L._AC_UL160_SR160,160_.jpg",
       "name": "Tshirts",
       "category": "cloth",
-      "quantity": 10,
+      "quantity": 9,
       "id": 1
     },
     {
@@ -141,7 +95,7 @@
       "imgUrl": "https://images-eu.ssl-images-amazon.com/images/I/61ZqGlb46sL._AC_UL160_SR160,160_.jpg",
       "name": "tshirt",
       "category": "cloth",
-      "quantity": 10,
+      "quantity": 6,
       "id": 3
     },
     {
@@ -151,7 +105,7 @@
       "imgUrl": "https://m.media-amazon.com/images/I/41V4aNRci3L._AC_SR400,600_AGcontrast_.jpg",
       "name": "Samsung",
       "category": "phone",
-      "quantity": 5,
+      "quantity": 3,
       "id": 4
     },
     {
@@ -181,7 +135,7 @@
       "imgUrl": "https://m.media-amazon.com/images/I/41IWcClcFnL._AC_UF226,226_FMjpg_.jpg",
       "name": "Electronics",
       "category": "home",
-      "quantity": 5,
+      "quantity": 4,
       "id": 7
     },
     {
@@ -213,16 +167,6 @@
       "category": "fruit",
       "quantity": 20,
       "id": 10
-    },
-    {
-      "name": "Banana",
-      "category": "fruit",
-      "description": "Banana Fruit",
-      "imgUrl": "data:image/jpeg;base64,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",
-      "actualPrice": "50",
-      "discPrice": "35",
-      "quantity": 50,
-      "id": 11
     }
   ]
 }
