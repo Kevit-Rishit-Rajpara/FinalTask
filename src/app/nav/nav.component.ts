@@ -20,7 +20,6 @@ export class NavComponent implements OnInit, DoCheck {
   @ViewChild('dropdownMenu', { static: true }) dropdownMenu:
     | ElementRef
     | undefined;
-
   isSeller = localStorage.getItem('isSeller');
   isLogin = localStorage.getItem('isLogin');
   showProfile = false;

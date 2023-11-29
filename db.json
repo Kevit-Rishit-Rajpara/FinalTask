@@ -36,8 +36,32 @@
       "phoneNumber": "8320314737",
       "city": "Rajkot",
       "uid": "BN9dkvL6etSv2xZskgVRozEgcok1",
-      "myProducts": [],
-      "cart": [],
+      "myProducts": [
+        {
+          "name": "Banana",
+          "category": "fruit",
+          "description": "aaaaa",
+          "imgUrl": "https://m.media-amazon.com/images/I/71Ishj3CaoL._AC_UL320_.jpg",
+          "actualPrice": "600",
+          "discPrice": "450",
+          "quantity": 22,
+          "current_Quantity": null,
+          "perticularSubTotal": null,
+          "id": 12
+        }
+      ],
+      "cart": [
+        {
+          "actualPrice": "649",
+          "description": "Black tshirt",
+          "discPrice": "550",
+          "imgUrl": "https://images-eu.ssl-images-amazon.com/images/I/61ZqGlb46sL._AC_UL160_SR160,160_.jpg",
+          "name": "tshirt",
+          "category": "cloth",
+          "quantity": 20,
+          "id": 3
+        }
+      ],
       "id": 2
     },
     {
@@ -65,6 +89,106 @@
       "myProducts": [],
       "cart": [],
       "id": 4
+    },
+    {
+      "isSeller": false,
+      "email": "abcd@gmai.com",
+      "password": "111111",
+      "firstName": "Rishit",
+      "lastName": "Rajpara",
+      "phoneNumber": "8320314737",
+      "city": "Rajkot",
+      "uid": "73w2g5YxPgg6DEICXAR9rL4vdYh1",
+      "myProducts": [],
+      "cart": [],
+      "id": 5
+    },
+    {
+      "isSeller": false,
+      "email": "buyyer21@gmail.com",
+      "password": "111111",
+      "firstName": "Rishit",
+      "lastName": "Rajpara",
+      "phoneNumber": "8320314737",
+      "city": "dftdfgdfgg",
+      "uid": "nTwFN9rGVUfKzVNzkOX8dNYIXtS2",
+      "myProducts": [],
+      "cart": [],
+      "id": 6
+    },
+    {
+      "isSeller": false,
+      "email": "seller2@gmail.com",
+      "password": "111111",
+      "firstName": "Rishit",
+      "lastName": "Rajpara",
+      "phoneNumber": "8320314737",
+      "city": "Rajkot",
+      "uid": "AShsDEN5vDUpZCFb712FHUQFE8r1",
+      "myProducts": [],
+      "cart": [],
+      "id": 7
+    },
+    {
+      "isSeller": true,
+      "email": "seller3@gmail.com",
+      "password": "111111",
+      "firstName": "Rishit",
+      "lastName": "Rajpara",
+      "phoneNumber": "8320314737",
+      "city": "Rajkot",
+      "uid": "KXRkNnIdVObWResarvFYQQZdOme2",
+      "myProducts": [],
+      "cart": [],
+      "id": 8
+    },
+    {
+      "isSeller": false,
+      "email": "seller4@gmail.com",
+      "password": "111111",
+      "firstName": "Rishit",
+      "lastName": "Rajpara",
+      "phoneNumber": "8320314737",
+      "city": "Rajkot",
+      "uid": "xg0sD7QFr8h1INoqMzBAWnbXoBN2",
+      "myProducts": [],
+      "cart": [
+        {
+          "actualPrice": "80",
+          "description": "Colured bottle",
+          "discPrice": "50",
+          "imgUrl": "https://m.media-amazon.com/images/I/51Ek75e5H5L._SY300_SX300_QL70_FMwebp_.jpg",
+          "name": "Bottle",
+          "category": "home",
+          "quantity": 20,
+          "id": 6,
+          "current_quan": null
+        },
+        {
+          "actualPrice": "80",
+          "description": "Colured bottle",
+          "discPrice": "50",
+          "imgUrl": "https://m.media-amazon.com/images/I/51Ek75e5H5L._SY300_SX300_QL70_FMwebp_.jpg",
+          "name": "Bottle",
+          "category": "home",
+          "quantity": 20,
+          "id": 6
+        }
+      ],
+      "id": 9
+    },
+    {
+      "isSeller": false,
+      "email": "seller5@gmail.com",
+      "password": "111111",
+      "firstName": "Rishit",
+      "lastName": "Rajpara",
+      "phoneNumber": "8320314737",
+      "city": "Rajkot",
+      "uid": "2u55hYeqc5Z8Wkyomi86QilrzbI3",
+      "myProducts": [],
+      "cart": [],
+      "id": 10
     }
   ],
   "Products": [
@@ -95,7 +219,7 @@
       "imgUrl": "https://images-eu.ssl-images-amazon.com/images/I/61ZqGlb46sL._AC_UL160_SR160,160_.jpg",
       "name": "tshirt",
       "category": "cloth",
-      "quantity": 6,
+      "quantity": 20,
       "id": 3
     },
     {
@@ -105,7 +229,7 @@
       "imgUrl": "https://m.media-amazon.com/images/I/41V4aNRci3L._AC_SR400,600_AGcontrast_.jpg",
       "name": "Samsung",
       "category": "phone",
-      "quantity": 3,
+      "quantity": 10,
       "id": 4
     },
     {

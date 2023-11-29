@@ -14,29 +14,31 @@ export class CartComponent implements OnInit, DoCheck {
     private userDataService: UserDataService,
     private productDataService: ProductDataService
   ) {}
-  a: any;
-  i: any;
+  edit: any;
+  iteration: any;
   subTotal: number = 0;
   gst: number = 0;
   Total: number = 0;
   ngOnInit(): void {
-    this.i = 0;
+    console.log(this.userDataService.currentCart);
+    
+    this.iteration = 0;
     this.userDataService.getUserById(localStorage.getItem('id')).subscribe(
       (res: any) => {
         this.myCart = res.cart;
-        for (this.a of this.myCart) {
-          this.a['current_quan'] = 1;
-          this.a['subtotalPerProduct'] = this.subtotalPerProduct(
-            this.i,
-            this.a.discPrice,
-            this.myCart[this.i].current_quan
+        for (this.edit of this.myCart) {
+          this.edit['current_quan'] = 1;
+          this.edit['subtotalPerProduct'] = this.subtotalPerProduct(
+            this.iteration,
+            this.edit.discPrice,
+            this.myCart[this.iteration].current_quan
           );
-          // console.log(this.myCart[this.i].subtotalPerProduct);
+          // console.log(this.myCart[this.iteration].subtotalPerProduct);
 
-          this.myCart.splice(this.i, 1, this.a);
-          this.i++;
+          this.myCart.splice(this.iteration, 1, this.edit);
+          this.iteration++;
 
-          // console.log(this.a);
+          // console.log(this.edit);
         }
       },
 
@@ -135,7 +137,7 @@ export class CartComponent implements OnInit, DoCheck {
             );
              const Toast = Swal.mixin({
                toast: true,
-               position: 'top-end',
+               position: 'bottom-end',
                showConfirmButton: false,
                timer: 1500,
                timerProgressBar: true,
