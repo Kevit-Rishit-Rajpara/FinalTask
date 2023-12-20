@@ -81,7 +81,6 @@ export class AuthComponent implements OnInit {
             .subscribe(
               (res) => {
                 this.userDataService.currentUser = res;
-                console.log(this.userDataService.currentUser);
                 localStorage.setItem(
                   'id',
                   this.userDataService.currentUser[0].id
@@ -104,10 +103,8 @@ export class AuthComponent implements OnInit {
                 );
                 this.userDataService.currentCart.cart =
                   this.userDataService.currentUser[0].cart;
-                console.log(this.userDataService.currentCart);
                 this.userDataService.currentMyProducts.myProducts =
                   this.userDataService.currentUser[0].myProducts;
-                console.log(this.userDataService.currentMyProducts);
               },
               (err) => {
                 console.log(err);
