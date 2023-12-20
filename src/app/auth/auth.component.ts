@@ -56,7 +56,6 @@ export class AuthComponent implements OnInit {
   }
 
   onLogin() {
-    // console.log(this.loginForm.value);
     this.authServie
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
@@ -77,16 +76,12 @@ export class AuthComponent implements OnInit {
             icon: 'success',
             title: 'Login successfully',
           });
-          // localStorage.setItem('uid', res.localId);
           this.userDataService
             .getUserByEmail(this.loginForm.value.email)
             .subscribe(
               (res) => {
-                // console.log(res);
-
                 this.userDataService.currentUser = res;
                 console.log(this.userDataService.currentUser);
-                // console.log(this.userDataService.currentUser[0]);
                 localStorage.setItem(
                   'id',
                   this.userDataService.currentUser[0].id
@@ -120,7 +115,6 @@ export class AuthComponent implements OnInit {
             );
           this.loginForm.reset();
           this.dialogRef.close();
-          // alert('Login Successfully');
         },
         (err: any) => {
           console.log('Error ' + err);
@@ -139,7 +133,6 @@ export class AuthComponent implements OnInit {
             icon: 'error',
             title: err,
           });
-          // alert(err);
         }
       );
   }
@@ -167,7 +160,6 @@ export class AuthComponent implements OnInit {
           });
 
           this.signUpForm.value.uid = res.localId;
-          // console.log(this.signUpForm.value + "Special");
           this.userDataService.setUserData(this.signUpForm.value).subscribe(
             (res: any) => {
               console.log(res);
@@ -194,7 +186,6 @@ export class AuthComponent implements OnInit {
             icon: 'error',
             title: err,
           });
-          // alert(err);
         }
     );
     this.dialogRef.close();

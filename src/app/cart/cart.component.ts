@@ -20,25 +20,19 @@ export class CartComponent implements OnInit, DoCheck {
   gst: number = 0;
   Total: number = 0;
   ngOnInit(): void {
-    console.log(this.userDataService.currentCart);
-    
     this.iteration = 0;
     this.userDataService.getUserById(localStorage.getItem('id')).subscribe(
       (res: any) => {
         this.myCart = res.cart;
         for (this.edit of this.myCart) {
-          this.edit['current_quan'] = 1;
           this.edit['subtotalPerProduct'] = this.subtotalPerProduct(
             this.iteration,
             this.edit.discPrice,
             this.myCart[this.iteration].current_quan
           );
-          // console.log(this.myCart[this.iteration].subtotalPerProduct);
 
           this.myCart.splice(this.iteration, 1, this.edit);
           this.iteration++;
-
-          // console.log(this.edit);
         }
       },
 
@@ -48,11 +42,8 @@ export class CartComponent implements OnInit, DoCheck {
     );
   }
   ngDoCheck(): void {
-    // console.log('Do Check');
-    // console.log(this.myCart);
     this.subTotal = 0;
     for (let t = 0; t < this.myCart.length; t++) {
-      // console.log('Do Check = ' + this.myCart[t].subtotalPerProduct);
       this.subTotal = this.subTotal + this.myCart[t].subtotalPerProduct;
     }
     this.gst = this.subTotal * 0.03;
@@ -83,18 +74,15 @@ export class CartComponent implements OnInit, DoCheck {
         this.myCart[index].current_quan,
         this.myCart[index].discPrice
       );
-      console.log(this.myCart);
     }
   }
 
   onDelete(index: any) {
-    console.log(index);
     this.userDataService.currentCart.cart.splice(index, 1);
     this.userDataService
       .updateUser(localStorage.getItem('id'), this.userDataService.currentCart)
       .subscribe(
         (res) => {
-          // console.log(res);
           this.ngOnInit();
         },
         (err) => {
@@ -109,16 +97,10 @@ export class CartComponent implements OnInit, DoCheck {
       let newQuantity: any;
       newQuantity = this.myCart[k].quantity - this.myCart[k].current_quan;
       this.productDataService.newQuantity.quantity = newQuantity;
-      // console.log(newQuantity);
-      // console.log(this.productDataService.newQuantity);
-      // console.log(this.myCart[k].id);
-
       this.productDataService
         .updateProduct(this.myCart[k].id, this.productDataService.newQuantity)
         .subscribe(
           (res: any) => {
-            // console.log(res);
-            // console.log('Product Buy');
             this.userDataService.currentCart.cart = [];
             this.myCart = [];
             this.userDataService
@@ -128,8 +110,6 @@ export class CartComponent implements OnInit, DoCheck {
               )
               .subscribe(
                 (res) => {
-                  // console.log(res);
-                  // this.ngOnInit();
                 },
                 (err) => {
                   console.log(err);
@@ -156,7 +136,5 @@ export class CartComponent implements OnInit, DoCheck {
           }
         );
     }
-    // this.userDataService.currentCart.cart = [];
-    // this.myCart = [];
   }
 }

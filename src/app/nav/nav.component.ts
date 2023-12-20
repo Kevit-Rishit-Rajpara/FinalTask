@@ -29,7 +29,6 @@ export class NavComponent implements OnInit, DoCheck {
   displayMenu = false
 
   ngOnInit(): void {
-    console.log(this.isSeller + "   onInit");
     
   }
 
@@ -39,12 +38,10 @@ export class NavComponent implements OnInit, DoCheck {
     this.fName = localStorage.getItem('fName')
     this.lName = localStorage.getItem('lName')
     this.email = localStorage.getItem('email')
-    // console.log(this.isSeller);
     
   }
 
   onToggleMenu() {
-    console.log('click');
     
     this.displayMenu = !this.displayMenu
   }

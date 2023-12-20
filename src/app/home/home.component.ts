@@ -11,11 +11,10 @@ import Swal from 'sweetalert2';
 })
 export class HomeComponent implements OnInit {
   event: any;
-  idDetails!: number;
+  idDetails!: any;
   constructor(
     private productDataService: ProductDataService,
-    private userDataService: UserDataService,
-    private router: Router
+    private userDataService: UserDataService
   ) {}
   discPer(actualPrice: any, discPrice: any) {
     return Math.ceil((100 * (actualPrice - discPrice)) / actualPrice);
@@ -23,20 +22,11 @@ export class HomeComponent implements OnInit {
   edit: any;
   iteration = 0;
   cartProduct: any;
-
+  buttonClick : any
   homeProducts: Array<any> = [];
 
   ngOnInit(): void {
-    console.log(this.homeProducts);
 
-    this.userDataService.getUser().subscribe(
-      (res) => {
-        // console.log(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
     this.productDataService.getProductsData().subscribe(
       (res: Object) => {
         for (let i = 0; i < Object.keys(res).length; i++) {
@@ -44,13 +34,6 @@ export class HomeComponent implements OnInit {
             this.homeProducts.push(Object.values(res)[i]);
           }
         }
-        // for (this.edit of this.homeProducts) {
-        //   this.edit['current_quan'] = 0;
-        //   this.homeProducts.splice(this.iteration, 1, this.edit);
-        //   this.iteration++;
-        //   // console.log(this.edit);
-        // }
-        console.log(this.homeProducts);
       },
       (err) => {
         console.log(err);
@@ -58,28 +41,33 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  openProduct(i: any) {
-    this.router.navigate(['/productDetail']);
-    console.log(i);
-  }
-
   addToCart(i: any, event: Event) {
     event.stopPropagation();
+    this.buttonClick = true
     if (localStorage.getItem('isLogin')) {
       this.idDetails = this.homeProducts[i];
-      // this.homeProducts[i].current_quan = this.homeProducts[i].current_quan+1
-      console.log(this.homeProducts[i].id);
-      console.log(this.userDataService.currentCart.cart);
-      for (this.cartProduct of this.userDataService.currentCart.cart) {
-        if (this.cartProduct.id == this.homeProducts[i].id) {
-          +this.cartProduct.current_quan++
-        } else {
-
+      if (this.userDataService.currentCart.cart.length == 0) {
+        this.idDetails['current_quan'] = 1;
+        this.userDataService.currentCart['cart'].push(this.idDetails);
+      } else {
+        let found;
+        for (let j = 0; j < this.userDataService.currentCart.cart.length; j++) {
+          if (
+            this.userDataService.currentCart.cart[j].id ===
+            this.homeProducts[i].id
+          ) {
+            this.userDataService.currentCart['cart'][j].current_quan += 1;
+            found = true;
+            break;
+          } else {
+            found = false;
+          }
+        }
+        if (found == false) {
+          this.idDetails['current_quan'] = 1;
+          this.userDataService.currentCart['cart'].push(this.idDetails);
         }
       }
-      this.userDataService.currentCart['cart'].push(this.idDetails);
-
-      // this.userDataService.currentUser.cart = this.userDataService.currentCart;
       this.userDataService
         .updateUser(
           localStorage.getItem('id'),
@@ -87,8 +75,6 @@ export class HomeComponent implements OnInit {
         )
         .subscribe(
           (res) => {
-            // this.userDataService.currentCart.push(res)
-            console.log(res);
             const Toast = Swal.mixin({
               toast: true,
               position: 'bottom-end',
@@ -126,7 +112,6 @@ export class HomeComponent implements OnInit {
         title: 'You need to Login First to access the CART',
       });
     }
-    // console.log(i);
-    // console.log('Product added to Cart');
+    this.buttonClick = false
   }
 }

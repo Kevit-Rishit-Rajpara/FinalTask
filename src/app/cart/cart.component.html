@@ -36,15 +36,14 @@
                     <td colspan="5">
 
                         <span
-                            class="w-full p-3 text-xl flex justify-center align-middle">Nothing</span>
+                            class="w-full p-3 text-xl flex justify-center align-middle text-white">Nothing in your Cart</span>
                     </td>
                 </tr>
                 <tr *ngFor="let product of myCart, let index = index"
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row"
                         class="px-1 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <!-- <img class="h-10" src="https://m.media-amazon.com/images/I/71Ishj3CaoL._SX679_.jpg" alt=""> -->
-                        <!-- <span>Apple MacBook Pro 17"</span> -->
+                        
                         <span> {{product.description}} </span>
                     </th>
                     <td class="px-1 sm:px-6 py-4 hidden md:inline-block">
