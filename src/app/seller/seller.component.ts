@@ -25,8 +25,8 @@ export class SellerComponent implements OnInit {
       actualPrice: new FormControl(null, Validators.required),
       discPrice: new FormControl(null, [Validators.required]),
       quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
-      current_Quantity : new FormControl(null),
-      perticularSubTotal : new FormControl(null)
+      current_Quantity: new FormControl(null),
+      perticularSubTotal: new FormControl(null),
     });
     this.fetchMyProducts();
   }
@@ -38,30 +38,18 @@ export class SellerComponent implements OnInit {
     this.userDataService.getUserById(localStorage.getItem('id')).subscribe(
       (res: any) => {
         this.myProducts = res.myProducts;
-        // console.log(res.myProducts);
-        
       },
-      err => {
+      (err) => {
         console.log(err);
-        
       }
-    )
-  }
-
-  getProductsData() {
-    // this.productDataService.getProductData(this.addProduct)
+    );
   }
 
   onAddProduct() {
     this.productDataService.setProductData(this.addProduct.value).subscribe(
       (res: any) => {
         this.addProduct.reset();
-        // console.log(res);
-        // this.myProduct.push(res.name)
-        // console.log(this.myProduct);
-        // this.authComponent.addProduct(res.name)
         this.userDataService.currentMyProducts.myProducts.push(res);
-        console.log(this.userDataService.currentMyProducts.myProducts);
         this.userDataService
           .updateUser(
             localStorage.getItem('id'),
@@ -69,11 +57,10 @@ export class SellerComponent implements OnInit {
           )
           .subscribe(
             (res) => {
-              // console.log(res);
               this.fetchMyProducts();
               const Toast = Swal.mixin({
                 toast: true,
-                position: 'top-end',
+                position: 'bottom-end',
                 showConfirmButton: false,
                 timer: 1500,
                 timerProgressBar: true,

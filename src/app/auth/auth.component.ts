@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { UserDataService } from '../userData.service';
@@ -37,7 +32,7 @@ export class AuthComponent implements OnInit {
     });
 
     this.signUpForm = new FormGroup({
-      isSeller: new FormControl('false'),
+      isSeller: new FormControl(false),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [
         Validators.required,
@@ -61,7 +56,6 @@ export class AuthComponent implements OnInit {
   }
 
   onLogin() {
-    // console.log(this.loginForm.value);
     this.authServie
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
@@ -69,9 +63,9 @@ export class AuthComponent implements OnInit {
           localStorage.setItem('isLogin', 'true');
           const Toast = Swal.mixin({
             toast: true,
-            position: 'top-end',
+            position: 'bottom-end',
             showConfirmButton: false,
-            timer: 1500,
+            timer: 1000,
             timerProgressBar: true,
             didOpen: (toast) => {
               toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -82,33 +76,35 @@ export class AuthComponent implements OnInit {
             icon: 'success',
             title: 'Login successfully',
           });
-          // localStorage.setItem('uid', res.localId);
           this.userDataService
             .getUserByEmail(this.loginForm.value.email)
             .subscribe(
               (res) => {
-                // console.log(res);
-
                 this.userDataService.currentUser = res;
-                console.log(this.userDataService.currentUser);
-                // console.log(this.userDataService.currentUser[0]);
                 localStorage.setItem(
                   'id',
                   this.userDataService.currentUser[0].id
                 );
-                localStorage.setItem('fName', this.userDataService.currentUser[0].firstName)
-                localStorage.setItem('lName', this.userDataService.currentUser[0].lastName)
-                localStorage.setItem('email', this.userDataService.currentUser[0].email)
+                localStorage.setItem(
+                  'fName',
+                  this.userDataService.currentUser[0].firstName
+                );
+                localStorage.setItem(
+                  'lName',
+                  this.userDataService.currentUser[0].lastName
+                );
+                localStorage.setItem(
+                  'email',
+                  this.userDataService.currentUser[0].email
+                );
                 localStorage.setItem(
                   'isSeller',
                   this.userDataService.currentUser[0].isSeller
                 );
                 this.userDataService.currentCart.cart =
                   this.userDataService.currentUser[0].cart;
-                console.log(this.userDataService.currentCart);
                 this.userDataService.currentMyProducts.myProducts =
                   this.userDataService.currentUser[0].myProducts;
-                console.log(this.userDataService.currentMyProducts);
               },
               (err) => {
                 console.log(err);
@@ -116,7 +112,6 @@ export class AuthComponent implements OnInit {
             );
           this.loginForm.reset();
           this.dialogRef.close();
-          // alert('Login Successfully');
         },
         (err: any) => {
           console.log('Error ' + err);
@@ -135,7 +130,6 @@ export class AuthComponent implements OnInit {
             icon: 'error',
             title: err,
           });
-          // alert(err);
         }
       );
   }
@@ -148,9 +142,9 @@ export class AuthComponent implements OnInit {
           console.log(res);
           const Toast = Swal.mixin({
             toast: true,
-            position: 'top-end',
+            position: 'bottom-end',
             showConfirmButton: false,
-            timer: 1500,
+            timer: 1000,
             timerProgressBar: true,
             didOpen: (toast) => {
               toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -159,10 +153,10 @@ export class AuthComponent implements OnInit {
           });
           Toast.fire({
             icon: 'success',
-            title: 'Signed in successfully',
+            title: 'Signed up successfully now you can Login',
           });
+
           this.signUpForm.value.uid = res.localId;
-          // console.log(this.signUpForm.value + "Special");
           this.userDataService.setUserData(this.signUpForm.value).subscribe(
             (res: any) => {
               console.log(res);
@@ -189,10 +183,9 @@ export class AuthComponent implements OnInit {
             icon: 'error',
             title: err,
           });
-          // alert(err);
         }
-      );
-    this.router.navigate(['']);
+    );
+    this.dialogRef.close();
   }
 
   addProduct(ele: any) {

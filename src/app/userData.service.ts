@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set, child, get } from 'firebase/database';
-import { User } from './auth/user.model';
-import { HtmlParser } from '@angular/compiler';
 
 @Injectable({ providedIn: 'root' })
 export class UserDataService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   
+
   userDatabaseUrl = 'http://localhost:3000/Users/';
 
   currentUser: any;
 
-  currentCart: { cart: number[] } = {
+  currentCart: { cart: any[] } = {
     cart: [],
   };
 
   currentMyProducts: { myProducts: any[] } = {
     myProducts: [],
+  };
+  currentSellerStatus: { isSeller: boolean } = {
+    isSeller : true,
   };
 
   getUserByEmail(email: any) {
@@ -26,7 +26,7 @@ export class UserDataService {
   }
 
   getUserById(id: any) {
-    return this.http.get(this.userDatabaseUrl + id)
+    return this.http.get(this.userDatabaseUrl + id);
   }
 
   setUserData(data: any) {

@@ -12,7 +12,7 @@ export class ProductDataService {
   };
 
   getProductsData() {
-    return this.http.get(this.productDatabaseUrl);
+     return this.http.get(this.productDatabaseUrl);
   }
 
   getPerticularProduct(id: any) {

@@ -79,8 +79,6 @@ export class AuthService {
   ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
-    // this.user.next(user);
-    // this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
@@ -90,6 +88,9 @@ export class AuthService {
       return throwError(errorMessage);
     }
     switch (errorRes.error.error.message) {
+      case 'INVALID_LOGIN_CREDENTIALS':
+        errorMessage = 'Invalid Login credentials';
+        break;
       case 'EMAIL_EXISTS':
         errorMessage = 'This email exists already';
         break;

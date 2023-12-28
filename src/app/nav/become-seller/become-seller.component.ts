@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthComponent } from 'src/app/auth/auth.component';
 import Swal from 'sweetalert2';
+import { UserDataService } from 'src/app/userData.service';
 
 @Component({
   selector: 'app-become-seller',
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./become-seller.component.css'],
 })
 export class BecomeSellerComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(private router: Router, public dialog: MatDialog, public userDataService : UserDataService) {}
 
   enableSellerMode(enterAnimationDuration: any, exitAnimationDuration: any) {
     if (localStorage.getItem('isLogin')) {
@@ -30,12 +31,27 @@ export class BecomeSellerComponent {
          title: 'Now You are Seller',
        });
       localStorage.setItem('isSeller', 'true');
+      this.userDataService.currentSellerStatus.isSeller = true;
+      this.userDataService
+        .updateUser(
+          localStorage.getItem('id'),
+          this.userDataService.currentSellerStatus
+        )
+        .subscribe(
+          (res) => {
+            // console.log(res);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+      
     } else {
        const Toast = Swal.mixin({
          toast: true,
-         position: 'top-end',
+         position: 'bottom-end',
          showConfirmButton: false,
-         timer: 2500,
+         timer: 1000,
          timerProgressBar: true,
          didOpen: (toast) => {
            toast.addEventListener('mouseenter', Swal.stopTimer);

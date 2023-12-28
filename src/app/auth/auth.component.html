@@ -55,7 +55,7 @@
                     </div>
 
                     <div class>
-                        <button type="submit" *ngIf="!newUser"
+                        <button type="submit" *ngIf="!newUser" [disabled]="!loginForm.valid"
                             class="rounded-3xl w-[8rem] py-2 my-2 font-bold focus:outline-none text-slate-600 bg-green-100 shadow-lg shadow-green-500/50 ...">Sign
                             In</button>
 
@@ -147,7 +147,7 @@
                         <!-- --------------------------------Phone---------------- -->
                         <div class="relative z-0 w-full lg:mb-6 group">
                             <input type="tel"
-                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                
                                 formControlName="phoneNumber"
                                 id="phone"
                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
@@ -175,7 +175,7 @@
                     </div>
 
                     <div class=" z-0">
-                        <button type="submit" *ngIf="newUser"
+                        <button type="submit" *ngIf="newUser" [disabled]="!signUpForm.valid"
                             class="rounded-3xl w-[8rem] py-2 my-2 font-bold focus:outline-none text-slate-600 bg-green-100 shadow-lg shadow-green-500/50 ...">Sign
                             Up</button>
                     </div>
